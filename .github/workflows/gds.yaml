@@ -44,9 +44,9 @@ jobs:
           f=tt/precheck/reports/magic_drc.txt
           if [ -f "$f" ]; then
             echo "== error types (count of coordinate lines per description) =="
-            awk '/^-+$/{next} /^[A-Za-z]/{d=$0; next} /^ *[0-9.-]+um/{c[d]++} END{for(k in c) printf "%6d  %s\n", c[k], k}' "$f" | sort -rn | head -40
+            awk '/^-+$/{next} /^[ ]*-?[0-9]/{c[d]++; if(!(d in x)){x[d]=$0}; next} {d=$0} END{for(k in c) printf "%6d  %s   first: %s\n", c[k], k, x[k]}' "$f" | sort -rn
             echo "== first 150 lines =="
-            head -n 150 "$f"
+            head -n 40 "$f"
           else
             ls -R tt/precheck/reports || true
           fi
