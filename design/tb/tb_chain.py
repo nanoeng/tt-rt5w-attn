@@ -146,7 +146,7 @@ def run(q, k, ks=(15, 15, 15, 15), corner="tt", temp=27.0, adct=16):
     for j in range(4):
         L.append(f"Vw{j} {node_w(j)} 0 {w_ref:.4f}")
         for i in range(4):
-            h = (w_ref - nu * math.log(k[j][i]) + nu * math.log(G0(corner, temp))) if k[j][i] > 0 else 0.0
+            h = (w_ref - nu * math.log(k[j][i]) + nu * math.log(G0(corner, temp))) if k[j][i] > 0 else 3.3   # k = 0: cell off (storage node at the rail)
             L.append(f"Vh{j}{i} {node_h(j, i)} 0 {h:.5f}")
     vals, _, out = sim.run("\n".join(L), (_sar_cont if SAR_MODE == "cont" else _sar)(adct), corner, temp, blocks=BLOCKS, timeout=7200, options=OPTIONS)
     got = [int(round(vals[f"code_{ch}"])) for ch in range(4)]
@@ -180,7 +180,7 @@ def dc_shares(q, k, ks=(15, 15, 15, 15), corner="tt", temp=27.0):
     for j in range(4):
         L.append(f"Vw{j} {node_w(j)} 0 {w_ref:.4f}")
         for i in range(4):
-            h = (w_ref - nu * math.log(k[j][i]) + nu * math.log(G0(corner, temp))) if k[j][i] > 0 else 0.0
+            h = (w_ref - nu * math.log(k[j][i]) + nu * math.log(G0(corner, temp))) if k[j][i] > 0 else 3.3   # k = 0: cell off (storage node at the rail)
             L.append(f"Vh{j}{i} {node_h(j, i)} 0 {h:.5f}")
     ctl = "op\n" + "\n".join(f"print @m.xa.xsm.xmo{j}.msky130_fd_pr__pfet_g5v0d10v5[id]" for j in range(4)) + "\n" + \
         "\n".join(f"print @m.xa.xsm.xmr{j}.msky130_fd_pr__nfet_g5v0d10v5[id]" for j in range(4)) + \

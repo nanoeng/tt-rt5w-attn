@@ -20,7 +20,11 @@ from cocotb.triggers import First, Timer
 from cocotb.utils import get_sim_time
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from rt5w.cosim import Cosim  # noqa: E402
+# COSIM_PDK: sky130 (default; the TTSKY26e macro, rt5w/cosim_sky130.py) or gf180 (the 19 Nov version, rt5w/cosim.py)
+if os.environ.get("COSIM_PDK", "sky130") == "sky130":
+    from rt5w.cosim_sky130 import Cosim  # noqa: E402
+else:
+    from rt5w.cosim import Cosim  # noqa: E402
 
 SAMPLE_NS = 100
 

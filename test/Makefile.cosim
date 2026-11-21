@@ -1,7 +1,10 @@
 # RTL + SPICE co-simulation: the controller RTL with the analog macro solved by ngspice / PySpice (test_cosim.py).
 #   make -f Makefile.cosim                                  # Icarus, PySpice (libngspice)
 #   make -f Makefile.cosim SIM=verilator COSIM_ENGINE=ngspice
-#   make -f Makefile.cosim COSIM_CORNER=ss COSIM_TEMP=-40 COSIM_BIAS_OFF=1e-3 COSIM_WAKE=128 COSIM_FULL=1
+#   make -f Makefile.cosim COSIM_CORNER=ss COSIM_TEMP=-40 COSIM_WAKE=128 COSIM_FULL=1
+#   COSIM_PDK=sky130 (default: TTSKY26e macro, rt5w/cosim_sky130.py) | gf180 (rt5w/cosim.py); COSIM_OFF_US: gated interval before a pass (sky130)
+export COSIM_PDK ?= sky130
+export COSIM_OFF_US ?= 100
 export COSIM_ENGINE ?= pyspice
 export COSIM_CORNER ?= tt
 export COSIM_TEMP ?= 27
@@ -12,7 +15,8 @@ export COSIM_FULL ?= 0
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(CURDIR)/../src
-VERILOG_SOURCES = $(SRC_DIR)/project.v $(SRC_DIR)/rt5w_digital.v $(SRC_DIR)/rt5w_ctrl.v $(CURDIR)/rt5w_analog_cosim.v $(CURDIR)/tb.v
+# src/project.v is the hard-macro interface (blackbox) since 20 Nov: the behavioural top + 3.3 V interface RTL, as in Makefile
+VERILOG_SOURCES = $(CURDIR)/tt_um_rt5w_attn_beh.v $(SRC_DIR)/rt5w_digital.v $(SRC_DIR)/rt5w_ctrl.v $(SRC_DIR)/rt5w_hvif.v $(CURDIR)/rt5w_analog_cosim.v $(CURDIR)/tb.v
 SIM_BUILD = sim_build/cosim_$(SIM)
 TOPLEVEL = tb
 COCOTB_TEST_MODULES = test_cosim

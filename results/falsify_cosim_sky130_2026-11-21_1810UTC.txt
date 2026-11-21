@@ -1,0 +1,45 @@
+RT5W sky130 (TTSKY26e) -- task: PSY-TaLiRo falsification + RTL/SPICE co-simulation on sky130, 2026-11-21
+Before: both ran on gf180mcuD netlists only (19 Nov). Now: sky130 schematics (netlist/), open_pdks sky130A d56f8a8.
+Tools: psy-taliro 3.2.0 (staliro), rtamt 0.3.5, PySpice 1.5 / libngspice 41, ngspice 41 CLI, cocotb 2.1 (conda build),
+Icarus Verilog 13.0, Verilator 5.054.
+
+1. Falsification (rt5w/falsify_sky130.py, examples/falsify_sky130.py; JSON in results/falsify_sky130/)
+ a) Softmax core + real rt5w_bias, step x_a -> x_b at 1 us, 61 us record; 40 transients per corner (30 UniformRandom
+    + 10 DualAnnealing, seed 1), x in [0,18]^4, T in [-40,125] C. Limits of record (rev-2), normalised rho_min:
+              R1     R1t    R2    R2t    R3     R4    R5     R6    R7
+    tt      -15.2  -14.7  +0.19 -25.3  -0.29  +1.00 +20.0  +0.17 -8.2
+    ss      -13.4  -15.4  +0.17 -25.9  -0.28  +1.00 +20.1  +0.18 -8.7
+    ff      -17.3  -14.4  +0.21 -25.0  -0.31  +1.00 +19.9  +0.18 -7.8
+    tt PySpice (10 samples): same transient as the CLI (cross-check); R1 -12.7, R3 -0.24, R7 -6.4, R2/R4/R5/R6 hold.
+    Counterexample R1/R3/R7: x_b = [15.7, 14.1, 5.2, 17.9], T = 124 C: codes [19,4,0,236] vs softmax [24,5,0,226].
+    Output sum / (4 I_tail) 1.00..1.02 over all samples (R1 limit 0.1 %); V_B 0.91..1.73 V (R7's 1.3 V is the gf180
+    amplifier range; the sky130 V_B buffer range is not yet a requirement). R1t/R2t: ~0.1 us spike at the step.
+ b) Full chain (rt5w_analog), q in {0..15}^4, k in [0.05,1]^16, ks in {1..15}^4, 32 DC samples per corner (24 UR + 8 DA),
+    2 worst confirmed with the continuous SAR. C1: max|code-model| <= 7.65 LSB; C2: clear winner kept.
+              C1 DC   C1 cont   C2
+    tt       -7.35    -4.35     +19 (held)
+    ss       -1.35    +1.65     +15 (held)
+    ff      -11.35    -7.35     +20 (held)
+    Worst: q [7,6,10,0], ks [10,4,2,1]: tt SAR [188,32,16,13] vs model [176,39,22,18]; ff SAR [191,31,15,12].
+    Cause: rows with a very small per-key scale (ks 1-2): the k-scale gain at its lowest codes. Winner never lost.
+
+2. RTL + SPICE co-simulation (rt5w/cosim_sky130.py, test/test_cosim.py, test/Makefile.cosim; COSIM_PDK=sky130 default)
+   bias + 4 IDAC + 4x4 key array + 4 k-scale + softmax at transistor level (PySpice/libngspice), controller RTL in
+   Icarus or Verilator. Ideal: key storage nodes (firmware key mapping, as tb_chain), the readout comparator (SAR
+   verified separately at transistor level), the V_B buffer.
+              Icarus   Verilator
+    cs01      pass     pass    codes [218,37,0,0] = SPICE op; ideal softmax [225,30,0,0]
+    cs02      pass     pass    3 random rows: 0 LSB from the op; 12 / 5 / 10 LSB from the ideal softmax
+    cs03      pass     pass    WAKE 30 / 128 / 255: 0 / 0 / 0 LSB from the settled op (gated 100 us before the pass)
+    cs04      pass     pass    VBCAL on SPICE: V_B0 0.67568 V, slope 44.25 mV/e-fold; E1..E7 max err 0.0298 (E1, E2),
+                               0.0106, 0.0174, 0.0162, 0.0245, 0.0267; argmax 7/7; 29 transients
+    cs05      see below (COSIM_FULL=1, Verilator)
+   Found while porting: (i) an op with bias_en = 0 does not converge to a physical state (taps -0.3..-0.9 V, 2 mA from
+   vdd): gated starts now begin at the bias-on op, gate off for COSIM_OFF_US (100 us), restart; settled ~60 us after
+   enable. (ii) q/k codes reach the macro through the 3.3 V config chain at the start of a pass: the test's state
+   snapshot moved after the pass. (iii) tb_chain: k = 0 forced h = 0 V (cell fully on): now 3.3 V (off); no earlier
+   result used k = 0. (iv) libngspice kept every node of every transient (6.3 GB, OOM kill): now .save of the outputs
+   only + remcirc (0.36 GB).
+   cs05 (Verilator, COSIM_FULL=1, 120 passes, 7172 s): SS-SGD on a mismatched die (gamma +3 %, -2.5 %, +2 %), median
+        code MAE per epoch 11.88 -> 3.75 -> 3.25 -> 2.75 -> 2.88 LSB: pass (gf180 run of 19 Nov: 12.62 -> 3.25 -> 4.88).
+        Not run on Icarus (same RTL results as Verilator on cs01-cs04; 2 h per run on this 2-CPU machine).

@@ -26,7 +26,10 @@ sys.path.insert(0, HERE)
 from cosim_driver import AnalogCosimDriver  # noqa: E402
 from test_rt5w import codes, load_keys, load_qk, rd, reset, run_pass, scores, wr  # noqa: E402
 from test_illustrated import CocotbHW, RtlBackend  # noqa: E402
-from rt5w.cosim import operating_point  # noqa: E402
+if os.environ.get("COSIM_PDK", "sky130") == "sky130":
+    from rt5w.cosim_sky130 import operating_point  # noqa: E402
+else:
+    from rt5w.cosim import operating_point  # noqa: E402
 from rt5w.illustrated import EXAMPLES, calibrate  # noqa: E402
 
 WAKE = int(os.environ.get("COSIM_WAKE", "255"))
@@ -55,8 +58,9 @@ async def _setup(dut, wake=WAKE):
 async def _one_row(dut, drv, q, k, ks):
     load_keys(dut, k)
     await load_qk(dut, q, ks)
-    st = drv.state()
     got = await run_pass(dut, timeout_us=400)
+    st = drv.state()     # after the pass: since 20 Nov q/k codes reach the macro through the 3.3 V config chain,
+                         # which the controller shifts at the start of a pass (not at the register write)
     sh, _ = operating_point(st, drv.cs.corner)
     op = [max(0, min(255, int(round(255 * v)))) for v in sh]
     gold = codes(scores(q, k, ks))
