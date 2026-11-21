@@ -1,0 +1,12 @@
+RT5W -- task: TT CI precheck fix (magic hvi.5), 2026-11-21 UTC
+CI (tt-gds-action ttsky26e): magic 8.3.568, PDK 0536d02, KLayout 0.30.13. First push: Magic DRC fail, 876 x hvi.5
+"HVI to HVI spacing < 0.7um"; every KLayout check passed. Local sign-off had used magic 8.3.465 (0 errors).
+Reproduced locally with magic 8.3.568 built from source (tag 8.3.568): 876, same rule.
+Cause: magic checks hvi.5 on mask hints only (drawn HVI minus HVI magic regenerates), per cell; overlapping or
+sub-0.7 um-separated hint pieces in different cells (device-cell jogs, parent fills, hvl std-cell rows) are flagged
+even where the union of HVI is continuous (flat KLayout space/notch checks: 0). Minimal cases: two devices 0.6 um
+apart fail with or without a covering parent HVI rectangle; abutted or >=0.7 um pass.
+Fix (scripts/hvi_fix.sh): HVI of every cell replaced by magic's regenerated HVI (round trip, gds maskhints no), plus
+KLayout closings (hvi.2a, MR_nwell.CON.1) per cell and flat in the top cell. All other layers unchanged.
+Result: magic 8.3.568 DRC 0; local TT precheck pass (magic 8.3.465, KLayout 0.28.16); full-chip LVS: circuits
+match uniquely.
