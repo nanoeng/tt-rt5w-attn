@@ -36,6 +36,21 @@ jobs:
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@ttsky26e
 
+      # The reports artifact is also uploaded by the action; print the magic DRC summary into the log as well,
+      # so a failure can be read without downloading the artifact.
+      - name: Magic DRC summary
+        if: always()
+        run: |
+          f=tt/precheck/reports/magic_drc.txt
+          if [ -f "$f" ]; then
+            echo "== error types (count of coordinate lines per description) =="
+            awk '/^-+$/{next} /^[A-Za-z]/{d=$0; next} /^ *[0-9.-]+um/{c[d]++} END{for(k in c) printf "%6d  %s\n", c[k], k}' "$f" | sort -rn | head -40
+            echo "== first 150 lines =="
+            head -n 150 "$f"
+          else
+            ls -R tt/precheck/reports || true
+          fi
+
   viewer:
     needs: gds
     runs-on: ubuntu-24.04
