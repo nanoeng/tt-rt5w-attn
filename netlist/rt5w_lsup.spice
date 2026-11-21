@@ -1,0 +1,25 @@
+** sch_path: /home/claude/rt5w_sky/tt/xschem/rt5w_lsup.sch
+.subckt rt5w_lsup in out vddl vdd vss
+*.ipin in
+*.opin out
+*.iopin vddl
+XMip inb in vddl vddl sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=1.68 nf=1 ad=0.4872 as=0.4872 pd=3.94 ps=3.94 nrd=0.1726 nrs=0.1726
++ sa=0 sb=0 sd=0 mult=1 m=1
+XMin inb in vss vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMpa xa xb vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=1 W=0.42 nf=1 ad=0.1218 as=0.1218 pd=1.42 ps=1.42 nrd=0.6905 nrs=0.6905 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMpb xb xa vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=1 W=0.42 nf=1 ad=0.1218 as=0.1218 pd=1.42 ps=1.42 nrd=0.6905 nrs=0.6905 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMna xa in vss vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=2.5 nf=1 ad=0.725 as=0.725 pd=5.58 ps=5.58 nrd=0.116 nrs=0.116 sa=0 sb=0
++ sd=0 mult=1 m=1
+XMnb xb inb vss vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=2.5 nf=1 ad=0.725 as=0.725 pd=5.58 ps=5.58 nrd=0.116 nrs=0.116 sa=0 sb=0
++ sd=0 mult=1 m=1
+XMop out xa vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=1.68 nf=1 ad=0.4872 as=0.4872 pd=3.94 ps=3.94 nrd=0.1726 nrs=0.1726 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMon out xa vss vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+.ends
+.GLOBAL vdd
+.GLOBAL vss
+.end

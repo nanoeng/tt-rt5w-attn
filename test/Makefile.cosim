@@ -1,0 +1,29 @@
+# RTL + SPICE co-simulation: the controller RTL with the analog macro solved by ngspice / PySpice (test_cosim.py).
+#   make -f Makefile.cosim                                  # Icarus, PySpice (libngspice)
+#   make -f Makefile.cosim SIM=verilator COSIM_ENGINE=ngspice
+#   make -f Makefile.cosim COSIM_CORNER=ss COSIM_TEMP=-40 COSIM_BIAS_OFF=1e-3 COSIM_WAKE=128 COSIM_FULL=1
+export COSIM_ENGINE ?= pyspice
+export COSIM_CORNER ?= tt
+export COSIM_TEMP ?= 27
+export COSIM_BIAS_OFF ?= 1e-6
+export COSIM_WAKE ?= 255
+export COSIM_N ?= 3
+export COSIM_FULL ?= 0
+SIM ?= icarus
+TOPLEVEL_LANG ?= verilog
+SRC_DIR = $(CURDIR)/../src
+VERILOG_SOURCES = $(SRC_DIR)/project.v $(SRC_DIR)/rt5w_digital.v $(SRC_DIR)/rt5w_ctrl.v $(CURDIR)/rt5w_analog_cosim.v $(CURDIR)/tb.v
+SIM_BUILD = sim_build/cosim_$(SIM)
+TOPLEVEL = tb
+COCOTB_TEST_MODULES = test_cosim
+ifeq ($(SIM),icarus)
+COMPILE_ARGS += -g2012
+endif
+ifeq ($(SIM),verilator)
+EXTRA_ARGS += --timing -Wno-fatal -Wno-lint -Wno-style -Wno-REALCVT -Wno-MULTIDRIVEN
+ifeq ($(WAVES),1)
+EXTRA_ARGS += --trace-fst --trace-structs
+SIM_ARGS += --trace --trace-file $(CURDIR)/../waves/cosim_verilator.fst
+endif
+endif
+include $(shell cocotb-config --makefiles)/Makefile.sim

@@ -1,0 +1,31 @@
+layout/gds/rt5w_idac4.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_coldiode.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_keycell.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_trimcell.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_pumpinv.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_kscale.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_softmax.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_bias.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_readout.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+layout/gds/rt5w_vbbuf.gds: 0 DRC errors (magic, drc(full), as TT precheck) in 0 rules
+rt5w_idac4: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_idac4.lvs.txt)
+rt5w_coldiode: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_coldiode.lvs.txt)
+rt5w_keycell: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_keycell.lvs.txt)
+rt5w_trimcell: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_trimcell.lvs.txt)
+rt5w_pumpinv: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_pumpinv.lvs.txt)
+rt5w_kscale: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_kscale.lvs.txt)
+rt5w_softmax: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_softmax.lvs.txt)
+rt5w_bias: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_bias.lvs.txt)
+rt5w_readout: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_readout.lvs.txt)
+rt5w_vbbuf: LVS CLEAN - Final result: Circuits match uniquely.  (layout/lvs/rt5w_vbbuf.lvs.txt)
+rt5w_idac4       72.9 x   30.1 =     2197 x 4 =     8787  util 0.25
+rt5w_coldiode    16.3 x   13.9 =      227 x 4 =      906  util 0.22
+rt5w_keycell     70.8 x   20.2 =     1429 x16 =    22865  util 0.24
+rt5w_trimcell    42.5 x   18.9 =      802 x 4 =     3209  util 0.21
+rt5w_pumpinv     11.7 x   11.3 =      132 x 3 =      397  util 0.08
+rt5w_kscale      64.2 x   45.0 =     2887 x 4 =    11549  util 0.30
+rt5w_softmax    281.9 x   80.3 =    22647 x 1 =    22647  util 0.38
+rt5w_bias       125.1 x  170.4 =    21314 x 1 =    21314  util 0.30
+rt5w_readout    165.2 x  125.2 =    20694 x 1 =    20694  util 0.21
+rt5w_vbbuf       65.3 x   58.9 =     3844 x 1 =     3844  util 0.31
+total 116212 device 32339 tile 150582

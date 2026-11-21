@@ -1,0 +1,5 @@
+worst reg/input -> reg (data arrival + setup): 39.79 ns at _1759_.D
+slack at 50.0 ns: 10.21 ns   (estimate: no wire RC, ideal clock, 5 fF/sink)
+  next: 38.71 ns _1797_.D
+  next: 38.25 ns _1785_.D
+  next: 38.25 ns _1743_.D

@@ -1,0 +1,9 @@
+.pixi
+.pdk
+**/sim_build
+**/__pycache__
+**/.pytest_cache
+**/*.fst
+**/*.vcd
+**/results.xml
+*.zip

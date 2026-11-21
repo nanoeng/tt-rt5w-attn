@@ -1,0 +1,38 @@
+** sch_path: /home/claude/rt5w_sky/tt/xschem/rt5w_trimcell.sch
+.subckt rt5w_trimcell vw wsel up_b up dn dn_b pg ng vmid w vdd vss
+*.iopin vw
+*.ipin wsel
+*.ipin pg
+*.ipin ng
+*.ipin up_b
+*.ipin up
+*.ipin dn
+*.ipin dn_b
+*.iopin vmid
+*.opin w
+XMpu pu pg vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=1.47 nf=1 ad=0.4263 as=0.4263 pd=3.52 ps=3.52 nrd=0.1973 nrs=0.1973 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMsu w up_b pu vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMsub vmid up pu vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMsd w dn nd vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMsdb vmid dn_b nd vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452
++ sa=0 sb=0 sd=0 mult=1 m=1
+XMnd nd ng vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.37 nf=1 ad=0.6873 as=0.6873 pd=5.32 ps=5.32 nrd=0.1224 nrs=0.1224 sa=0
++ sb=0 sd=0 mult=1 m=1
+XCw vss w vss vss sky130_fd_pr__nfet_g5v0d10v5 L=10.4 W=10.4 nf=1 ad=3.016 as=3.016 pd=21.38 ps=21.38 nrd=0.02788 nrs=0.02788 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMwn w wsel vw vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMwp w wselb vw vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMip wselb wsel vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452
++ sa=0 sb=0 sd=0 mult=1 m=1
+XMin wselb wsel vss vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452
++ sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+.GLOBAL vdd
+.GLOBAL vss
+.end

@@ -1,0 +1,166 @@
+{
+ "date": "2026-11-19 19:19 UTC",
+ "rows": [
+  {
+   "area": "bias",
+   "item": "I_u, keep-alive @ typical 27 C",
+   "value": "125.7 nA, gated 1.24 %",
+   "spec": "I_u 125 nA x PTAT/R (+-40 % corners); gated 0.5..2 %",
+   "ok": true
+  },
+  {
+   "area": "idac",
+   "item": "monotonic / INL @ typical 27 C",
+   "value": "INL 0.000 LSB, gain +4.0 %",
+   "spec": "monotonic, INL < 0.5 LSB",
+   "ok": true
+  },
+  {
+   "area": "keycell",
+   "item": "gain at k=1 over q @ typical 27 C",
+   "value": "spread 0.99 %",
+   "spec": "q-independent within 5 % (buffered gate offset, O1)",
+   "ok": true
+  },
+  {
+   "area": "softmax",
+   "item": "share error / V_B fit @ typical 27 C",
+   "value": "2.89 LSB, V_B residual 1.3 mV",
+   "spec": "<= 4 LSB vs softmax(x); V_B linear in LSE within 3 mV",
+   "ok": true
+  },
+  {
+   "area": "readout",
+   "item": "SAR codes vs model @ typical 27 C",
+   "value": "max |err| 1 LSB",
+   "spec": "<= 1 LSB (12 codes, mid-step inputs)",
+   "ok": true
+  },
+  {
+   "area": "vbbuf",
+   "item": "ua[1] - V_B, settling @ typical 27 C",
+   "value": "4.0 mV, 5.8 us",
+   "spec": "<= 6 mV over 1.2..2.3 V, < 20 us",
+   "ok": true
+  },
+  {
+   "area": "bias",
+   "item": "I_u, keep-alive @ ss -40 C",
+   "value": "92.7 nA, gated 1.35 %",
+   "spec": "I_u 125 nA x PTAT/R (+-40 % corners); gated 0.5..2 %",
+   "ok": true
+  },
+  {
+   "area": "idac",
+   "item": "monotonic / INL @ ss -40 C",
+   "value": "INL 0.000 LSB, gain +4.0 %",
+   "spec": "monotonic, INL < 0.5 LSB",
+   "ok": true
+  },
+  {
+   "area": "keycell",
+   "item": "gain at k=1 over q @ ss -40 C",
+   "value": "spread 1.00 %",
+   "spec": "q-independent within 5 % (buffered gate offset, O1)",
+   "ok": true
+  },
+  {
+   "area": "softmax",
+   "item": "share error / V_B fit @ ss -40 C",
+   "value": "3.97 LSB, V_B residual 1.3 mV",
+   "spec": "<= 4 LSB vs softmax(x); V_B linear in LSE within 3 mV",
+   "ok": true
+  },
+  {
+   "area": "readout",
+   "item": "SAR codes vs model @ ss -40 C",
+   "value": "max |err| 0 LSB",
+   "spec": "<= 1 LSB (12 codes, mid-step inputs)",
+   "ok": true
+  },
+  {
+   "area": "vbbuf",
+   "item": "ua[1] - V_B, settling @ ss -40 C",
+   "value": "5.5 mV, 1.7 us",
+   "spec": "<= 6 mV over 1.2..2.3 V, < 20 us",
+   "ok": true
+  },
+  {
+   "area": "bias",
+   "item": "I_u, keep-alive @ ff 125 C",
+   "value": "176.2 nA, gated 1.14 %",
+   "spec": "I_u 125 nA x PTAT/R (+-40 % corners); gated 0.5..2 %",
+   "ok": true
+  },
+  {
+   "area": "idac",
+   "item": "monotonic / INL @ ff 125 C",
+   "value": "INL 0.082 LSB, gain +3.8 %",
+   "spec": "monotonic, INL < 0.5 LSB",
+   "ok": true
+  },
+  {
+   "area": "keycell",
+   "item": "gain at k=1 over q @ ff 125 C",
+   "value": "spread 1.56 %",
+   "spec": "q-independent within 5 % (buffered gate offset, O1)",
+   "ok": true
+  },
+  {
+   "area": "softmax",
+   "item": "share error / V_B fit @ ff 125 C",
+   "value": "2.20 LSB, V_B residual 1.1 mV",
+   "spec": "<= 4 LSB vs softmax(x); V_B linear in LSE within 3 mV",
+   "ok": true
+  },
+  {
+   "area": "readout",
+   "item": "SAR codes vs model @ ff 125 C",
+   "value": "max |err| 1 LSB",
+   "spec": "<= 1 LSB (12 codes, mid-step inputs)",
+   "ok": true
+  },
+  {
+   "area": "vbbuf",
+   "item": "ua[1] - V_B, settling @ ff 125 C",
+   "value": "3.9 mV, 5.1 us",
+   "spec": "<= 6 mV over 1.2..2.3 V, < 20 us",
+   "ok": true
+  },
+  {
+   "area": "bias",
+   "item": "start-up from a 10 us supply ramp",
+   "value": "13.6 us, 125.7 nA",
+   "spec": "settles < 50 us to I_u",
+   "ok": true
+  },
+  {
+   "area": "chain",
+   "item": "q=[15, 15, 15, 15] ks=[15, 15, 15, 15]",
+   "value": "SPICE [255, 0, 0, 0] model [255, 0, 0, 0]",
+   "spec": "<= 5 LSB per code (tt 27 C)",
+   "ok": true
+  },
+  {
+   "area": "chain",
+   "item": "q=[15, 8, 4, 0] ks=[15, 15, 15, 15]",
+   "value": "SPICE [133, 25, 8, 88] model [130, 24, 9, 91]",
+   "spec": "<= 5 LSB per code (tt 27 C)",
+   "ok": true
+  },
+  {
+   "area": "chain",
+   "item": "q=[7, 7, 7, 7] ks=[15, 15, 15, 15]",
+   "value": "SPICE [63, 63, 63, 63] model [64, 64, 64, 64]",
+   "spec": "<= 5 LSB per code (tt 27 C)",
+   "ok": true
+  },
+  {
+   "area": "chain",
+   "item": "q=[15, 8, 4, 0] ks=[9, 15, 12, 6]",
+   "value": "SPICE [85, 118, 27, 25] model [81, 122, 28, 25]",
+   "spec": "<= 5 LSB per code (tt 27 C)",
+   "ok": true
+  }
+ ]
+}

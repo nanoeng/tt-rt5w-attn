@@ -1,0 +1,240 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+MACRO rt5w_bias
+  CLASS BLOCK ;
+  FOREIGN rt5w_bias ;
+  ORIGIN 3.050 148.980 ;
+  SIZE 129.490 BY 149.780 ;
+  SYMMETRY X Y ;
+  PIN bias_en
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -40.875 -0.550 -40.575 ;
+    END
+  END bias_en
+  PIN iref
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -40.195 -0.550 -39.895 ;
+    END
+  END iref
+  PIN kbias
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 123.940 -103.695 126.440 -103.395 ;
+    END
+  END kbias
+  PIN nbias
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -41.555 -0.550 -41.255 ;
+    END
+  END nbias
+  PIN nd0
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -82.845 -0.550 -82.545 ;
+    END
+  END nd0
+  PIN nd1
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -83.525 -0.550 -83.225 ;
+    END
+  END nd1
+  PIN nd2
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -84.205 -0.550 -83.905 ;
+    END
+  END nd2
+  PIN nd3
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -84.885 -0.550 -84.585 ;
+    END
+  END nd3
+  PIN ndac
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 123.940 -41.555 126.440 -41.255 ;
+    END
+  END ndac
+  PIN ng
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -42.915 -0.550 -42.615 ;
+    END
+  END ng
+  PIN pg
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -44.275 -0.550 -43.975 ;
+    END
+  END pg
+  PIN vbn
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 123.940 -40.875 126.440 -40.575 ;
+    END
+  END vbn
+  PIN vcas
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -42.235 -0.550 -41.935 ;
+    END
+  END vcas
+  PIN vdd
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT -2.400 -148.980 -0.800 0.800 ;
+    END
+  END vdd
+  PIN vmid
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -85.565 -0.550 -85.265 ;
+    END
+  END vmid
+  PIN vr
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -43.595 -0.550 -43.295 ;
+    END
+  END vr
+  PIN vss
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT 124.190 -148.980 125.790 0.800 ;
+    END
+  END vss
+  OBS
+    LAYER li1 ;
+      RECT -0.055 -147.895 89.835 -147.565 ;
+      RECT -0.655 -71.360 -0.550 -71.030 ;
+      RECT -0.655 -57.365 -0.550 -57.035 ;
+      RECT -0.655 -32.275 -0.550 -31.945 ;
+      RECT -0.655 -13.905 -0.550 -13.575 ;
+      RECT -0.550 -146.480 123.940 -1.700 ;
+      RECT -0.655 -129.355 -0.550 -129.025 ;
+      RECT -0.655 -112.225 -0.550 -111.895 ;
+      RECT -0.655 -95.775 -0.550 -95.445 ;
+      RECT -0.655 -0.615 89.615 -0.285 ;
+    LAYER met1 ;
+      RECT -0.100 -147.895 89.880 -147.565 ;
+      RECT -0.700 -71.360 -0.550 -71.030 ;
+      RECT -0.700 -57.365 -0.550 -57.035 ;
+      RECT -0.700 -32.275 -0.550 -31.945 ;
+      RECT -0.700 -13.905 -0.550 -13.575 ;
+      RECT -0.550 -146.480 123.940 -1.700 ;
+      RECT -0.700 -129.355 -0.550 -129.025 ;
+      RECT -0.700 -112.225 -0.550 -111.895 ;
+      RECT -0.700 -95.775 -0.550 -95.445 ;
+      RECT -0.700 -0.615 89.660 -0.285 ;
+    LAYER met2 ;
+      RECT -0.040 -147.915 0.240 -147.545 ;
+      RECT 89.540 -147.915 89.820 -147.545 ;
+      RECT -0.640 -0.635 -0.360 -0.265 ;
+      RECT 5.335 -147.545 5.535 -146.480 ;
+      RECT 5.295 -147.915 5.575 -147.545 ;
+      RECT 13.915 -147.545 14.115 -146.480 ;
+      RECT 13.875 -147.915 14.155 -147.545 ;
+      RECT 22.495 -147.545 22.695 -146.480 ;
+      RECT 22.455 -147.915 22.735 -147.545 ;
+      RECT 31.075 -147.545 31.275 -146.480 ;
+      RECT 31.035 -147.915 31.315 -147.545 ;
+      RECT 39.655 -147.545 39.855 -146.480 ;
+      RECT 39.615 -147.915 39.895 -147.545 ;
+      RECT 48.235 -147.545 48.435 -146.480 ;
+      RECT 48.195 -147.915 48.475 -147.545 ;
+      RECT 58.505 -147.545 58.705 -146.480 ;
+      RECT 58.465 -147.915 58.745 -147.545 ;
+      RECT 67.085 -147.545 67.285 -146.480 ;
+      RECT 67.045 -147.915 67.325 -147.545 ;
+      RECT 75.665 -147.545 75.865 -146.480 ;
+      RECT 75.625 -147.915 75.905 -147.545 ;
+      RECT -0.630 -57.360 -0.550 -57.040 ;
+      RECT -0.600 -71.010 -0.550 -57.360 ;
+      RECT -0.640 -71.380 -0.550 -71.010 ;
+      RECT -0.640 -32.295 -0.550 -31.925 ;
+      RECT -0.640 -13.925 -0.550 -13.555 ;
+      RECT -0.550 -146.480 123.940 -1.700 ;
+      RECT 0.650 -1.700 0.850 -0.635 ;
+      RECT 0.610 -0.635 0.890 -0.265 ;
+      RECT -0.640 -129.375 -0.550 -129.005 ;
+      RECT -0.640 -112.245 -0.550 -111.875 ;
+      RECT 84.245 -147.545 84.445 -146.480 ;
+      RECT 84.205 -147.915 84.485 -147.545 ;
+      RECT -0.640 -95.795 -0.550 -95.425 ;
+      RECT 89.320 -0.635 89.600 -0.265 ;
+    LAYER met3 ;
+      RECT -3.050 -148.180 126.440 -147.280 ;
+      RECT -0.550 -146.480 123.940 -137.275 ;
+      RECT 124.395 -137.290 124.785 -137.275 ;
+      RECT 124.395 -136.975 124.785 -136.960 ;
+      RECT -0.550 -137.275 125.195 -136.975 ;
+      RECT 125.195 -137.290 125.585 -136.960 ;
+      RECT -2.195 -86.260 -1.805 -86.245 ;
+      RECT -1.395 -86.260 -1.005 -86.245 ;
+      RECT -2.195 -85.945 -1.805 -85.930 ;
+      RECT -1.395 -85.945 -1.005 -85.930 ;
+      RECT -0.550 -13.290 123.940 -6.175 ;
+      RECT -3.050 -14.190 126.440 -13.290 ;
+      RECT -0.550 -31.660 123.940 -14.190 ;
+      RECT -3.050 -32.560 126.440 -31.660 ;
+      RECT -0.550 -70.745 123.940 -32.560 ;
+      RECT -3.050 -71.645 126.440 -70.745 ;
+      RECT -0.550 -95.160 123.940 -71.645 ;
+      RECT -2.195 -86.245 -0.550 -85.945 ;
+      RECT -3.050 -96.060 126.440 -95.160 ;
+      RECT -0.550 -111.610 123.940 -96.060 ;
+      RECT -3.050 -112.510 126.440 -111.610 ;
+      RECT -0.550 -128.740 123.940 -112.510 ;
+      RECT -3.050 -129.640 126.440 -128.740 ;
+      RECT -0.550 -136.975 123.940 -129.640 ;
+      RECT 124.395 -6.190 124.785 -6.175 ;
+      RECT 124.395 -5.875 124.785 -5.860 ;
+      RECT -0.550 -6.175 125.195 -5.875 ;
+      RECT 125.195 -6.190 125.585 -5.860 ;
+      RECT -0.550 -5.875 123.940 -1.700 ;
+      RECT -3.050 -0.900 126.440 0.000 ;
+    LAYER met4 ;
+      RECT -0.550 -146.480 123.940 -1.700 ;
+  END
+END rt5w_bias
+END LIBRARY

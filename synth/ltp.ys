@@ -1,0 +1,4 @@
+read_liberty -lib /home/claude/ext/gf180_sc7_ss_125C_3v00.lib
+read_verilog gate_level_ctrl_ss.v
+hierarchy -top rt5w_ctrl
+ltp -noff

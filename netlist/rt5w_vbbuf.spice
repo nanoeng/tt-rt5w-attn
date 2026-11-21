@@ -1,0 +1,40 @@
+** sch_path: /home/claude/rt5w_sky/tt/xschem/rt5w_vbbuf.sch
+.subckt rt5w_vbbuf vb vbn en pad vdd vss
+*.ipin vb
+*.ipin vbn
+*.ipin en
+*.opin pad
+XMl1 d1 d1 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=16.54 nf=1 ad=4.797 as=4.797 pd=33.66 ps=33.66 nrd=0.01753 nrs=0.01753 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMl2 o1 d1 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=16.54 nf=1 ad=4.797 as=4.797 pd=33.66 ps=33.66 nrd=0.01753 nrs=0.01753 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMi1 d1 bo tl vss sky130_fd_pr__nfet_g5v0d10v5 L=2 W=3.03 nf=1 ad=0.8787 as=0.8787 pd=6.64 ps=6.64 nrd=0.09571 nrs=0.09571 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMi2 o1 vb tl vss sky130_fd_pr__nfet_g5v0d10v5 L=2 W=3.03 nf=1 ad=0.8787 as=0.8787 pd=6.64 ps=6.64 nrd=0.09571 nrs=0.09571 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMt tl tg vss vss sky130_fd_pr__nfet_g5v0d10v5 L=4 W=2.24 nf=1 ad=0.6496 as=0.6496 pd=5.06 ps=5.06 nrd=0.1295 nrs=0.1295 sa=0 sb=0
++ sd=0 mult=4 m=4
+XMo bo o1 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=3.6 nf=1 ad=1.044 as=1.044 pd=7.78 ps=7.78 nrd=0.08056 nrs=0.08056 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMos bo tg vss vss sky130_fd_pr__nfet_g5v0d10v5 L=4 W=2.24 nf=1 ad=0.6496 as=0.6496 pd=5.06 ps=5.06 nrd=0.1295 nrs=0.1295 sa=0
++ sb=0 sd=0 mult=32 m=32
+XCc o1 bo o1 o1 sky130_fd_pr__pfet_g5v0d10v5 L=20 W=20 nf=1 ad=5.8 as=5.8 pd=40.58 ps=40.58 nrd=0.0145 nrs=0.0145 sa=0 sb=0 sd=0
++ mult=1 m=1
+XMoff o1 en vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMen1 vbn en tg vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMen2 tg enb vss vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMinp enb en vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMinn enb en vss vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=0.84 nf=1 ad=0.2436 as=0.2436 pd=2.26 ps=2.26 nrd=0.3452 nrs=0.3452 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMtgn bo en pad vss sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0
++ sd=0 mult=1 m=1
+XMtgp bo enb pad vdd sky130_fd_pr__pfet_g5v0d10v5 L=0.5 W=8 nf=1 ad=2.32 as=2.32 pd=16.58 ps=16.58 nrd=0.03625 nrs=0.03625 sa=0
++ sb=0 sd=0 mult=1 m=1
+.ends
+.GLOBAL vdd
+.GLOBAL vss
+.end

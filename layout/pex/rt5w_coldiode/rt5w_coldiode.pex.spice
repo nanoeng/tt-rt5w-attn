@@ -1,0 +1,12 @@
+* NGSPICE file created from rt5w_coldiode.ext - technology: sky130A
+
+.subckt rt5w_coldiode dcol vdd vss
+X0 dcol dcol vdd vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.6003 pd=4.43 as=1.2006 ps=8.86 w=4.14 l=4
+X1 vdd dcol dcol vdd sky130_fd_pr__pfet_g5v0d10v5 ad=1.2006 pd=8.86 as=0.6003 ps=4.43 w=4.14 l=4
+C0 vss vdd 0.691091f
+C1 dcol vdd 2.406682f
+C2 dcol vss 0.442426f
+C3 vss VSUBS 2.7502f
+C4 dcol VSUBS 3.27985f
+C5 vdd VSUBS 11.887174f
+.ends

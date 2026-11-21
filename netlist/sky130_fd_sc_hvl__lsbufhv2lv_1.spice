@@ -1,0 +1,13 @@
+* from skywater-pdk-libs-sky130_fd_sc_hvl 4fd4f85 (CDL schematic), for simulation
+.SUBCKT sky130_fd_sc_hvl__lsbufhv2lv_1 A LVPWR VGND VNB VPB VPWR X
+XMI7 Abb Ab VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI35 cross1 cross2 LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=1.12 L=0.15 m=1
+XMI36 cross2 cross1 LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=1.12 L=0.15 m=1
+XMI34 X cross2 LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=1.12 L=0.15 m=1
+XMI27 Ab A VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI8 Abb Ab VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI21 cross2 Abb VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=4
+XMI22 cross1 Ab VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=4
+XMI28 Ab A VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI29 X cross2 VGND VNB sky130_fd_pr__nfet_01v8 W=0.74 L=0.15 m=1
+.ENDS sky130_fd_sc_hvl__lsbufhv2lv_1

@@ -1,0 +1,134 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+MACRO rt5w_kscale
+  CLASS BLOCK ;
+  FOREIGN rt5w_kscale ;
+  ORIGIN 3.050 45.760 ;
+  SIZE 65.120 BY 46.560 ;
+  SYMMETRY X Y ;
+  PIN g
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -9.335 -0.550 -9.035 ;
+    END
+  END g
+  PIN k0
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -27.545 -0.550 -27.245 ;
+    END
+  END k0
+  PIN k1
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -28.225 -0.550 -27.925 ;
+    END
+  END k1
+  PIN k2
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 59.570 -28.225 62.070 -27.925 ;
+    END
+  END k2
+  PIN k3
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 59.570 -30.945 62.070 -30.645 ;
+    END
+  END k3
+  PIN row
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -10.015 -0.550 -9.715 ;
+    END
+  END row
+  PIN vdd
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT -2.400 -45.760 -0.800 0.800 ;
+    END
+  END vdd
+  PIN vss
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT 59.820 -45.760 61.420 0.800 ;
+    END
+  END vss
+  OBS
+    LAYER li1 ;
+      RECT -0.655 -44.675 22.355 -44.345 ;
+      RECT -0.655 -19.085 -0.550 -18.755 ;
+      RECT -0.550 -43.260 59.570 -1.700 ;
+      RECT -0.655 -0.615 49.835 -0.285 ;
+    LAYER met1 ;
+      RECT -0.700 -44.675 22.400 -44.345 ;
+      RECT -0.700 -19.085 -0.550 -18.755 ;
+      RECT -0.550 -43.260 59.570 -1.700 ;
+      RECT -0.700 -0.615 49.880 -0.285 ;
+    LAYER met2 ;
+      RECT -0.640 -44.695 -0.360 -44.325 ;
+      RECT 22.060 -44.695 22.340 -44.325 ;
+      RECT -0.640 -0.635 -0.360 -0.265 ;
+      RECT 0.445 -44.325 0.645 -43.260 ;
+      RECT 0.405 -44.695 0.685 -44.325 ;
+      RECT 5.025 -44.325 5.225 -43.260 ;
+      RECT 4.985 -44.695 5.265 -44.325 ;
+      RECT 9.605 -44.325 9.805 -43.260 ;
+      RECT 9.565 -44.695 9.845 -44.325 ;
+      RECT 14.185 -44.325 14.385 -43.260 ;
+      RECT 14.145 -44.695 14.425 -44.325 ;
+      RECT 2.695 -0.635 2.975 -0.265 ;
+      RECT 2.735 -1.700 2.935 -0.635 ;
+      RECT 7.275 -0.635 7.555 -0.265 ;
+      RECT 7.315 -1.700 7.515 -0.635 ;
+      RECT 11.855 -0.635 12.135 -0.265 ;
+      RECT 11.895 -1.700 12.095 -0.635 ;
+      RECT 16.435 -0.635 16.715 -0.265 ;
+      RECT 16.475 -1.700 16.675 -0.635 ;
+      RECT 21.015 -0.635 21.295 -0.265 ;
+      RECT 21.055 -1.700 21.255 -0.635 ;
+      RECT 25.595 -0.635 25.875 -0.265 ;
+      RECT 25.635 -1.700 25.835 -0.635 ;
+      RECT 30.175 -0.635 30.455 -0.265 ;
+      RECT 30.215 -1.700 30.415 -0.635 ;
+      RECT 34.755 -0.635 35.035 -0.265 ;
+      RECT 34.795 -1.700 34.995 -0.635 ;
+      RECT 39.335 -0.635 39.615 -0.265 ;
+      RECT 39.375 -1.700 39.575 -0.635 ;
+      RECT 43.915 -0.635 44.195 -0.265 ;
+      RECT 43.955 -1.700 44.155 -0.635 ;
+      RECT -0.640 -19.105 -0.550 -18.735 ;
+      RECT 18.765 -44.325 18.965 -43.260 ;
+      RECT 18.725 -44.695 19.005 -44.325 ;
+      RECT 48.495 -0.635 48.775 -0.265 ;
+      RECT 48.535 -1.700 48.735 -0.635 ;
+      RECT -0.550 -43.260 59.570 -1.700 ;
+      RECT 49.540 -0.635 49.820 -0.265 ;
+    LAYER met3 ;
+      RECT -3.050 -44.960 62.070 -44.060 ;
+      RECT -0.550 -18.470 59.570 -1.700 ;
+      RECT -3.050 -19.370 62.070 -18.470 ;
+      RECT -0.550 -43.260 59.570 -19.370 ;
+      RECT -3.050 -0.900 62.070 0.000 ;
+    LAYER met4 ;
+      RECT -0.550 -43.260 59.570 -1.700 ;
+  END
+END rt5w_kscale
+END LIBRARY

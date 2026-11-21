@@ -1,0 +1,424 @@
+{
+ "block": "rt5w_readout",
+ "gds": "layout/gds/rt5w_readout.gds",
+ "width": 178.94,
+ "height": 116.09,
+ "origin": [
+  -2.6,
+  -116.09
+ ],
+ "pairs": 4,
+ "spine": 36,
+ "devices": 131,
+ "device_area_um2": 4212,
+ "shorts": 0,
+ "pair_info": [
+  {
+   "chan_tracks": 35,
+   "band": 0,
+   "top_h": 5.105,
+   "bot_h": 6.645,
+   "top_w": 100.35,
+   "bot_w": 107.34,
+   "n_nets": 66,
+   "ports": [
+    "adc_ch0",
+    "adc_ch1",
+    "adc_ch2",
+    "adc_ch3",
+    "adc_lat",
+    "adc_rst",
+    "cmp",
+    "dac0",
+    "dac1",
+    "dac2",
+    "dac3",
+    "dac4",
+    "dac5",
+    "dac6",
+    "dac7",
+    "ndac",
+    "out0",
+    "out1",
+    "out2",
+    "out3",
+    "vcas",
+    "vr"
+   ],
+   "spine_ports": [
+    "adc_lat",
+    "cmp",
+    "dac3",
+    "dac4",
+    "dac5",
+    "dac6",
+    "dac7",
+    "ndac",
+    "vr"
+   ],
+   "spines_through": 31
+  },
+  {
+   "chan_tracks": 8,
+   "band": 0,
+   "top_h": 5.325,
+   "bot_h": 5.325,
+   "top_w": 139.38,
+   "bot_w": 153.78,
+   "n_nets": 11,
+   "ports": [],
+   "spine_ports": [],
+   "spines_through": 11
+  },
+  {
+   "chan_tracks": 3,
+   "band": 0,
+   "top_h": 5.325,
+   "bot_h": 5.325,
+   "top_w": 146.25,
+   "bot_w": 146.25,
+   "n_nets": 4,
+   "ports": [],
+   "spine_ports": [],
+   "spines_through": 4
+  },
+  {
+   "chan_tracks": 26,
+   "band": 0,
+   "top_h": 5.325,
+   "bot_h": 4.855,
+   "top_w": 134.61,
+   "bot_w": 104.07,
+   "n_nets": 46,
+   "ports": [],
+   "spine_ports": [],
+   "spines_through": 31
+  }
+ ],
+ "ports": [
+  "out0",
+  "out1",
+  "out2",
+  "out3",
+  "ndac",
+  "vcas",
+  "vr",
+  "adc_ch0",
+  "adc_ch1",
+  "adc_ch2",
+  "adc_ch3",
+  "adc_rst",
+  "adc_lat",
+  "dac0",
+  "dac1",
+  "dac2",
+  "dac3",
+  "dac4",
+  "dac5",
+  "dac6",
+  "dac7",
+  "cmp",
+  "vdd",
+  "vss"
+ ],
+ "pins": [
+  {
+   "net": "adc_ch0",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -8.445,
+   "side": "L"
+  },
+  {
+   "net": "adc_ch1",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -10.485,
+   "side": "L"
+  },
+  {
+   "net": "adc_ch2",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -11.165,
+   "side": "L"
+  },
+  {
+   "net": "adc_ch3",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -15.245,
+   "side": "L"
+  },
+  {
+   "net": "out0",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -11.845,
+   "side": "L"
+  },
+  {
+   "net": "vr",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -19.325,
+   "side": "L"
+  },
+  {
+   "net": "out1",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -12.525,
+   "side": "L"
+  },
+  {
+   "net": "out2",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -13.205,
+   "side": "L"
+  },
+  {
+   "net": "out3",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -13.885,
+   "side": "L"
+  },
+  {
+   "net": "dac3",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -14.565,
+   "side": "L"
+  },
+  {
+   "net": "dac4",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -15.925,
+   "side": "L"
+  },
+  {
+   "net": "dac5",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -16.605,
+   "side": "L"
+  },
+  {
+   "net": "dac6",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -17.965,
+   "side": "L"
+  },
+  {
+   "net": "dac7",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -20.005,
+   "side": "L"
+  },
+  {
+   "net": "adc_lat",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -17.285,
+   "side": "L"
+  },
+  {
+   "net": "dac0",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -13.205,
+   "side": "R"
+  },
+  {
+   "net": "cmp",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -18.645,
+   "side": "L"
+  },
+  {
+   "net": "dac1",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -10.485,
+   "side": "R"
+  },
+  {
+   "net": "dac2",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -13.885,
+   "side": "R"
+  },
+  {
+   "net": "vcas",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -14.565,
+   "side": "R"
+  },
+  {
+   "net": "ndac",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -30.885,
+   "side": "L"
+  },
+  {
+   "net": "adc_rst",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -15.925,
+   "side": "R"
+  },
+  {
+   "net": "vdd",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -0.45,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vdd",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -0.45,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -42.0,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -42.0,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -42.0,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -42.0,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -64.09,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -64.09,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -64.09,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -64.09,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -81.78,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -81.78,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -81.78,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -81.78,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -115.64,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 176.34,
+   "y": -115.64,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vdd",
+   "layer": "met4",
+   "x": -1.6,
+   "y": -58.045,
+   "side": "L",
+   "width": 1.6
+  },
+  {
+   "net": "vss",
+   "layer": "met4",
+   "x": 175.34,
+   "y": -58.045,
+   "side": "R",
+   "width": 1.6
+  }
+ ]
+}

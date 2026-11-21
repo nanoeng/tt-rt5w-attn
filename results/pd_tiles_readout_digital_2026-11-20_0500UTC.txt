@@ -1,0 +1,31 @@
+RT5W sky130 -- task: tiles / readout logic / digital density -- 2026-11-20 05:00 UTC
+=====================================================================================
+1) 4x4 array as tiles (design/layout/tiler.py -> layout/gds/rt5w_array.gds)
+   leaves: 16 keycell (N/FS, shared rails), 4 idac4 + 4 coldiode, 4 trimcell + 3 pumpinv
+   v1 (all ports to a left-edge bus) ............ 406.9 x 195.7 um = 79.6k um2, 1 short
+   v2 single-channel ports -> met4 top-edge pins .. 406.9 x 161.0 um, 54 top pins, 5 bus nets
+   fixes: stubs overlap trunk ends (met3.2 notch), nwell bridging at FS/N seams (nwell.2a/.8),
+          supply stubs at pin width (vdd/vss short), ray test for pins of narrower tiles,
+          column diode moved to y=18-33.5 um inside the IDAC height (frees q/dcol/nd rays)
+   final ........................................ 412.3 x 161.0 um = 66.4k um2
+   magic DRC (drc(full), maskhints, euclidean) ... 0
+   netgen LVS (hierarchical) ..................... Circuits match uniquely
+   leaf area inside = 39.6k um2 -> 60 % of the tiled outline; 40 % = 6 channels of met4 lanes (9-18 lanes each)
+2) Readout
+   barycentric reorder made the readout worse at 160 um (2 met4 escape shorts sk7/gk7 -> fallback 462 x 66 um)
+   generate_best now tries reorder on/off on a finer width grid
+   result: 165.2 x 125.2 um = 20.7k um2 (reorder off), DRC 0, LVS match. Device area 4.37k um2 (21 %).
+   width sweep (no reorder): 60:22.8k(shorts) 90:21.0k(shorts) 120:22.5k(shorts) 160:20.7k 200:25.4k 300:31.9k 460:33.3k
+3) Digital at 1.8 V (sky130_fd_sc_hd, yosys 0.33 + OpenROAD) -> layout/gds/rt5w_ctrl.gds
+   synthesis: 1187 cells, 12.72k um2
+   160x120 @0.80/0.88: global placement / detailed placement fail (CTS + repair buffers)
+   160x130 @0.85: routes, 9486 DRT violations after pass 0, met1 overcongested in 32 % of gcells -> abandoned
+   170x145 @0.70: 0 DRT violations, 14.75k um2 cells = 72 % utilisation, magic DRC 0
+       (fixes: ring core offset 1.5 um vs met3 via landing pads; bottom routing layer met1, no li1 patches)
+   timing tt_025C_1v80, 50 ns clock (no wire RC set -> estimate): WNS setup +36.6 ns, hold +0.37 ns, TNS 0
+   gate-level cocotb (post-route netlist, sky130_fd_sc_hd functional models): 9/9 PASS
+4) Area ledger (k um2)
+   array 66.4 | readout 20.7 | kscale x4 11.5 | softmax 22.6 | bias 21.3 | vbbuf 3.8  => analog 146.4
+   + digital 24.7 => 171.1 = 114 % of the 4x2 tile (150.6k) before level shifters and top routing
+   6x2 (229.1k): 75 % before level shifters and top routing
+   correction: the 116k of 19 Nov counted the array leaves untiled (36k); tiled with routing it is 66.4k.

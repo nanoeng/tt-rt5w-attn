@@ -1,0 +1,13 @@
+# yosys synthesis of the RT5W digital macro onto sky130_fd_sc_hd (tt, 25 C, 1.8 V)
+read_verilog -sv ../../src/rt5w_ctrl.v ../../src/rt5w_digital.v
+hierarchy -check -top rt5w_digital
+synth -top rt5w_digital -flatten
+dfflibmap -liberty build/hd_tt_filtered.lib
+abc -liberty build/hd_tt_filtered.lib
+setundef -zero
+opt_clean -purge
+hilomap -singleton -hicell sky130_fd_sc_hd__conb_1 HI -locell sky130_fd_sc_hd__conb_1 LO
+opt_clean -purge
+insbuf -buf sky130_fd_sc_hd__buf_1 A X
+tee -o build/synth_stat.txt stat -liberty LIB
+write_verilog -noattr -noexpr build/rt5w_digital.syn.v

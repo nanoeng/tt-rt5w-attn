@@ -1,0 +1,5 @@
+#!/bin/sh
+# px <env> cmd...   run in a pixi environment of the shared manifest, with the sky130A PDK selected
+export PATH=/home/claude/ext/pixi:$PATH PDK_ROOT=/home/claude/ext/pdk PDK=sky130A USER=${USER:-claude}
+e=$1; shift
+exec pixi run --manifest-path /home/claude/rt5w_tt/pixi.toml -e "$e" "$@"

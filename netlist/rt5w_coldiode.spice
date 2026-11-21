@@ -1,0 +1,8 @@
+** sch_path: /home/claude/rt5w_sky/tt/xschem/rt5w_coldiode.sch
+.subckt rt5w_coldiode dcol vdd
+*.iopin dcol
+XMd dcol dcol vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=8.27 nf=1 ad=2.398 as=2.398 pd=17.12 ps=17.12 nrd=0.03507 nrs=0.03507
++ sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+.GLOBAL vdd
+.end

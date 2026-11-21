@@ -1,0 +1,48 @@
+
+=== policy: all devices at the weak-inversion plateau (stored rule)
+  bias     beta-multiplier core + mirrors               12 x n W   3.75 L   2.00  gm/ID 15.7   weak      footprint      173 um2
+  bias     PMOS distribution                            14 x p W  13.81 L   4.00  gm/ID 17.8   weak      footprint     1050 um2
+  bias     cascode/start-up/switches                    10 x n W   0.84 L   0.50  min/cap                footprint       28 um2
+  idac     column IDAC units (4 x 15)                   60 x n W   5.13 L   4.00  gm/ID 15.6   weak      footprint     1845 um2
+  idac     IDAC switches                                64 x n W   0.84 L   0.50  min/cap                footprint      178 um2
+  array    column diodes (4)                             4 x p W  22.63 L   1.00  gm/ID 19.0   weak      footprint      198 um2
+  array    array PMOS Mc (16)                           16 x p W  22.63 L   1.00  gm/ID 19.0   weak      footprint      791 um2
+  array    key-cell DDA pairs (16 x 4)                  64 x n W   1.51 L   1.00  gm/ID 15.9   weak      footprint      324 um2
+  array    key-cell DDA loads/tails (16 x 4)            64 x p W   3.12 L   1.00  gm/ID 19.0   weak      footprint      540 um2
+  array    key storage caps (16 + 4)                    20 x cap W  10.43 L  10.43  min/cap                footprint     2611 um2
+  array    write TGs, inverters, pumps                 120 x n W   0.84 L   0.50  min/cap                footprint      334 um2
+  kscale   key-scale mirrors (4 x 32)                  128 x n W   5.13 L   4.00  gm/ID 15.6   weak      footprint     3936 um2
+  softmax  exponentiators Me (4)                         4 x n W  28.62 L   1.00  gm/ID 15.9   weak      footprint      248 um2
+  softmax  PMOS diodes + x4 outputs (4 x 20 units)      80 x p W   9.71 L   4.00  gm/ID 17.8   weak      footprint     4329 um2
+  softmax  tail, cascodes, keep-alive                   12 x n W   3.75 L   2.00  gm/ID 15.7   weak      footprint      173 um2
+  readout  DAC units (271)                             271 x n W   1.85 L   4.00  gm/ID 15.6   weak      footprint     3801 um2
+  readout  DAC cascodes / switches / mux               300 x n W   0.84 L   0.50  min/cap                footprint      835 um2
+  readout  StrongARM + SR latch                         20 x n W   4.21 L   1.00  gm/ID 15.9   weak      footprint      215 um2
+  vbbuf    V_B buffer                                   15 x n W   6.06 L   1.00  gm/ID 15.9   weak      footprint      219 um2
+  device footprint 21828 um2 -> analog blocks at 33% utilisation 66145 um2
+  sky130 2x2 (3v3): tile 72072 um2; analog 66145 + digital 21105 + shifters 2100 = 89350 um2 -> 1.24 x the tile
+  sky130 4x2 (3v3): tile 150582 um2; analog 66145 + digital 21105 + shifters 2100 = 89350 um2 -> 0.59 x the tile
+
+=== policy: ratio devices allowed gm/ID = 11 (moderate inversion)
+  bias     beta-multiplier core + mirrors               12 x n W   3.66 L   1.00  gm/ID 11.0   moderate  footprint      115 um2
+  bias     PMOS distribution                            14 x p W  21.01 L   1.00  gm/ID 11.0   moderate  footprint      644 um2
+  bias     cascode/start-up/switches                    10 x n W   0.84 L   0.50  min/cap                footprint       28 um2
+  idac     column IDAC units (4 x 15)                   60 x n W  10.18 L   1.00  gm/ID 11.0   moderate  footprint     1396 um2
+  idac     IDAC switches                                64 x n W   0.84 L   0.50  min/cap                footprint      178 um2
+  array    column diodes (4)                             4 x p W   7.56 L   1.00  gm/ID 11.0   moderate  footprint       71 um2
+  array    array PMOS Mc (16)                           16 x p W   7.56 L   1.00  gm/ID 11.0   moderate  footprint      284 um2
+  array    key-cell DDA pairs (16 x 4)                  64 x n W   1.51 L   1.00  gm/ID 15.9   weak      footprint      324 um2
+  array    key-cell DDA loads/tails (16 x 4)            64 x p W   3.12 L   1.00  gm/ID 19.0   weak      footprint      540 um2
+  array    key storage caps (16 + 4)                    20 x cap W  10.43 L  10.43  min/cap                footprint     2611 um2
+  array    write TGs, inverters, pumps                 120 x n W   0.84 L   0.50  min/cap                footprint      334 um2
+  kscale   key-scale mirrors (4 x 32)                  128 x n W  10.18 L   1.00  gm/ID 11.0   moderate  footprint     2978 um2
+  softmax  exponentiators Me (4)                         4 x n W  28.62 L   1.00  gm/ID 15.9   weak      footprint      248 um2
+  softmax  PMOS diodes + x4 outputs (4 x 20 units)      80 x p W  14.77 L   1.00  gm/ID 11.0   moderate  footprint     2633 um2
+  softmax  tail, cascodes, keep-alive                   12 x n W   3.66 L   1.00  gm/ID 11.0   moderate  footprint      115 um2
+  readout  DAC units (271)                             271 x n W   3.66 L   1.00  gm/ID 11.0   moderate  footprint     2595 um2
+  readout  DAC cascodes / switches / mux               300 x n W   0.84 L   0.50  min/cap                footprint      835 um2
+  readout  StrongARM + SR latch                         20 x n W   4.21 L   1.00  gm/ID 15.9   weak      footprint      215 um2
+  vbbuf    V_B buffer                                   15 x n W   6.06 L   1.00  gm/ID 15.9   weak      footprint      219 um2
+  device footprint 16363 um2 -> analog blocks at 33% utilisation 49586 um2
+  sky130 2x2 (3v3): tile 72072 um2; analog 49586 + digital 21105 + shifters 2100 = 72791 um2 -> 1.01 x the tile
+  sky130 4x2 (3v3): tile 150582 um2; analog 49586 + digital 21105 + shifters 2100 = 72791 um2 -> 0.48 x the tile

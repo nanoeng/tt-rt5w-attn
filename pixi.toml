@@ -1,0 +1,111 @@
+[workspace]
+name = "rt5w-tt"
+version = "0.3.0"
+description = "RT5W analog attention head: TinyTapeout gf180mcuD design, verification, emulation and HIL toolchain"
+channels = ["conda-forge"]
+# linux-64: native and in the container. osx-64: Intel Macs, and Apple Silicon under Rosetta 2.
+# linux-aarch64 / osx-arm64 are not listed: conda-forge has no cocotb, iverilog, ngspice or yosys builds for them (Nov 2026).
+platforms = ["linux-64", "osx-64"]
+# Local conda->PyPI name map: pixi otherwise fetches it from conda-mapping.prefix.dev (blocked on some networks).
+conda-pypi-map = { "conda-forge" = { location = "pixi_pypi_map.json", mapping-mode = "replace" }, "litex-hub" = { location = "pixi_pypi_map.json", mapping-mode = "replace" } }
+
+[dependencies]
+python = "3.12.*"
+numpy = ">=1.26"
+scipy = ">=1.11"
+pytest = ">=8"
+pyserial = "3.5.*"
+cocotb = "2.1.*"
+ngspice = ">=41"            # CLI
+ngspice-lib = ">=41"        # libngspice for PySpice
+iverilog = ">=12"
+verilator = ">=5.036"       # cocotb 2.x requirement
+yosys = ">=0.33"
+micropython = ">=1.22"      # firmware self-test (unix port)
+make = "*"
+cxx-compiler = "*"          # cocotb builds its Verilator/VPI glue with the host C++ compiler
+git = "*"
+pillow = "*"
+# PySpice 1.5 runtime dependencies, from conda so that only PySpice itself comes from PyPI
+pyyaml = "*"
+cffi = "*"
+matplotlib-base = "*"
+ply = "*"
+requests = "*"
+
+[pypi-dependencies]
+pyspice = "==1.5"          # conda-forge build stops at Python 3.10; the PyPI wheel is pure Python
+mpremote = ">=1.24"        # copy the HIL firmware to the TT demo board (PyPI only)
+# PsyTaLiRo (STL falsification, imports as `staliro`). PyPI stops at 1.0.0, which needs numpy<2
+# (uses np.float_); v3.2.0 supports numpy>=2 but is only on GitHub, so pin the release commit.
+psy-taliro = { git = "https://github.com/cpslab-asu/psy-taliro", rev = "887f2dc321e83688796307f8b0abcf22b3a57b4c" }  # tag v3.2.0
+rtamt = "==0.3.5"          # STL monitors (PsyTaLiRo backend; also used directly on cocotb traces)
+
+[target.linux-64.dependencies]
+gtkwave = "3.3.*"           # optional: headless screenshots in CI (make waves); view waves on the host
+
+[activation.env]
+RT5W_PDK = "$PIXI_PROJECT_ROOT/.pdk"
+GF180_MODELS = "$PIXI_PROJECT_ROOT/.pdk/gf180mcu_fd_pr/models/ngspice"
+
+[target.unix.activation.env]
+NGSPICE_LIBRARY_PATH = "$CONDA_PREFIX/lib/libngspice.so"
+
+[target.osx-64.activation.env]
+NGSPICE_LIBRARY_PATH = "$CONDA_PREFIX/lib/libngspice.dylib"
+
+[tasks]
+pdk = "sh scripts/fetch_pdk.sh"
+emu = { cmd = "python -m pytest -q tests/", depends-on = ["pdk"] }
+rtl = "make -C test && make -C test -f Makefile.illustrated"
+rtl-vl = "make -C test SIM=verilator && make -C test -f Makefile.illustrated SIM=verilator"
+gl = "make -C test GATES=yes"
+corners = { cmd = "python examples/illustrated_transformer.py --backend ngspice --corner ss --temp -40 && python examples/illustrated_transformer.py --backend ngspice --corner ff --temp 125", depends-on = ["pdk"] }
+examples = { cmd = "python examples/illustrated_transformer.py", depends-on = ["pdk"] }
+rfc2217 = "python hil/tools/rfc2217_bridge.py"
+falsify = { cmd = "python examples/falsify_softmax.py", depends-on = ["pdk"] }
+falsify-rtl = "make -C test -f Makefile.falsify"
+falsify-rtl-vl = "make -C test -f Makefile.falsify SIM=verilator"
+cosim = { cmd = "make -C test -f Makefile.cosim", depends-on = ["pdk"] }
+cosim-vl = { cmd = "make -C test -f Makefile.cosim SIM=verilator", depends-on = ["pdk"] }
+
+# ---------------------------------------------------------------- physical design (linux-64 only)
+# pd: schematic capture, layout, DRC/LVS/extraction (default tools + these). openroad: digital hardening only
+# (litex-hub's OpenROAD build is pinned to an old Python, so it lives in its own environment).
+[feature.pd]
+channels = ["conda-forge", "litex-hub"]
+platforms = ["linux-64"]
+
+[feature.pd.dependencies]
+klayout = "0.30.*"
+xschem = { version = "*", channel = "litex-hub" }
+magic = { version = "*", channel = "litex-hub" }
+netgen = { version = "*", channel = "litex-hub" }
+
+[feature.pd.pypi-dependencies]
+ciel = "*"            # fetches the open_pdks gf180mcuD build (KLayout tech, pcells, DRC/LVS decks, xschem, std cells)
+gdstk = "*"
+
+[feature.gf]               # KLayout layout generation with the PDK pcells (cells/draw_fet.py needs gdsfactory 7, numpy < 2)
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[feature.gf.dependencies]
+python = "3.11.*"
+numpy = "<2"
+pip = "*"
+
+[feature.gf.pypi-dependencies]
+gdsfactory = "==7.8.18"
+
+[feature.openroad]
+channels = ["litex-hub", "conda-forge"]
+platforms = ["linux-64"]
+
+[feature.openroad.dependencies]
+openroad = "*"
+
+[environments]
+pd = ["pd"]
+layout = { features = ["pd", "gf"], no-default-feature = true }
+openroad = { features = ["openroad"], no-default-feature = true }

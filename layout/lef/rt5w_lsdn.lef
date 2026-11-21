@@ -1,0 +1,73 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+MACRO rt5w_lsdn
+  CLASS BLOCK ;
+  FOREIGN rt5w_lsdn ;
+  ORIGIN 3.050 12.945 ;
+  SIZE 12.600 BY 13.745 ;
+  SYMMETRY X Y ;
+  PIN in
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -6.075 -0.550 -5.775 ;
+    END
+  END in
+  PIN out
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 7.050 -6.075 9.550 -5.775 ;
+    END
+  END out
+  PIN vddl
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT -2.400 -12.945 -0.800 0.800 ;
+    END
+  END vddl
+  PIN vss
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT 7.300 -12.945 8.900 0.800 ;
+    END
+  END vss
+  OBS
+    LAYER li1 ;
+      RECT 0.545 -11.860 5.755 -11.530 ;
+      RECT -0.550 -10.445 7.050 -1.700 ;
+      RECT -0.655 -0.615 5.015 -0.285 ;
+    LAYER met1 ;
+      RECT 0.500 -11.860 5.800 -11.530 ;
+      RECT -0.550 -10.445 7.050 -1.700 ;
+      RECT -0.700 -0.615 5.060 -0.285 ;
+    LAYER met2 ;
+      RECT 0.560 -11.880 0.840 -11.510 ;
+      RECT 5.460 -11.880 5.740 -11.510 ;
+      RECT -0.640 -0.635 -0.360 -0.265 ;
+      RECT 1.430 -11.510 1.630 -10.445 ;
+      RECT 1.390 -11.880 1.670 -11.510 ;
+      RECT 0.405 -0.635 0.685 -0.265 ;
+      RECT 0.445 -1.700 0.645 -0.635 ;
+      RECT -0.550 -10.445 7.050 -1.700 ;
+      RECT 3.880 -11.510 4.080 -10.445 ;
+      RECT 3.840 -11.880 4.120 -11.510 ;
+      RECT 2.925 -1.700 3.125 -0.635 ;
+      RECT 2.885 -0.635 3.165 -0.265 ;
+      RECT 4.720 -0.635 5.000 -0.265 ;
+    LAYER met3 ;
+      RECT -3.050 -12.145 9.550 -11.245 ;
+      RECT -0.550 -10.445 7.050 -1.700 ;
+      RECT -3.050 -0.900 9.550 0.000 ;
+    LAYER met4 ;
+      RECT -0.550 -10.445 7.050 -1.700 ;
+  END
+END rt5w_lsdn
+END LIBRARY

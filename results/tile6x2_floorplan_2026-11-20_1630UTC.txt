@@ -1,0 +1,34 @@
+RT5W sky130 -- task: move to 6x2 (tt_analog_6x2_3v3, 1014.76 x 225.76 um = 229.1k um2) -- 2026-11-20 16:30 UTC
+==============================================================================================================
+Owner decisions (20 Nov): move to 6x2; readout back to 8 bit (6-bit sources archived in archive/6bit_2026-11-20/).
+info.yaml: tiles "6x2", uses_vapwr true (3.3 V analog VAPWR, 1.8 V digital VDPWR).
+
+8-bit restore: readout 165.2 x 125.2 um DRC 0 LVS match; RTL 9/9; digital 170x145 re-hardened 0 route viol., DRC 0, GL 9/9.
+
+Level shifters (74 up 1.8 -> 3.3 V, 1 down)
+  own cells (design/blocks/lshift.py): up 24.1 x 15.3 um (369 um2) -> 27.3k for 74 -> too large
+  sky130_fd_sc_hvl from GitHub (skywater-pdk-libs-sky130_fd_sc_hvl 4fd4f85): lsbuflv2hv_1 10.56 x 8.14 um
+    ngspice (CDL schematic) 5 corners x 3 T x 2 supply sets: rise <= 2.39 ns, fall <= 1.70 ns, rail-to-rail, HV static <= 15 nA
+  lsbufhv2lv_1: magic hvi.5 / hvntm.1 error inside the cell next to X (exposed by any pin contact) -> down-shifter = own
+    rt5w_lsdn (11.7 x 12.1 um, DRC 0, LVS match; corners rise <= 1.32 ns)
+  bank v2 (design/layout/lsbank.py): 2 rows, row 1 offset half a cell, A pins up / X pins down on met2, slot order =
+    destination x: 400.4 x 20.3 um (8.0k um2), DRC 0, LVS match (74 cells)
+Re-shaped blocks for the 6x2 floorplan (all DRC 0, LVS match)
+  array flat (trims | pump inv + column diodes | 4 key columns | IDAC 0,1 | IDAC 2,3): 541.9 x 129.3 um
+    lane order by side + precedence (no opposite-stub overlaps), lanes on the 0.46 um met4 grid (pitch 0.92),
+    top pins protrude 1.2 um above the vdd rail with a via3 + met3 landing pad
+  bias 137.2 x 150.5, softmax 103.6 x 217.4, vbbuf 117.4 x 39.6, kscale 64.2 x 45.0, pump inverter pins moved left
+Top level (design/layout/topflow.py, lefgen.py, merge.py, lvs_top.py)
+  LEF abstracts (KLayout): pin = merged polygon under the label, clipped to a 2.5 um edge band; OBS = solid core +
+    real metal in the band; pins extended to the cell edge in the block GDS (TritonRoute needs boundary pins)
+  OpenROAD: macros FIRM, met1..met4, half-pitch tracks, pin_access limited to met4, supplies as wide nets (NDR
+    met3/met4 1.0 um, met1/met2 0.5 um; VGND un-specialised from the template), TT digital pins by abutment / via
+    stacks, ua0..2 via met4 stub + met3 pad
+  result with a placeholder digital abstract (525 x 56 um): global + detailed route 0 violations, 45.6 mm wire, no met5
+BLOCKER: the digital macro in that shape is not routable
+  525 x 52/56/58 um (58-75 % util): detailed route 42k -> 156k violations (shorts on met1), FlexGR worst H congestion
+  650 %; routability-driven placement at 0.62: still 430 % / 40.7k violations.  Cause: ~247 horizontal tracks
+  (met1 + met3) for nets running along the 525 um axis (74 outputs over 400 um + broadcast SPI/write strobes).
+  The 170 x 145 um macro routes clean.  Height budget above the 129.3 um array: <= ~90 um for bank + digital.
+Area ledger 6x2 (k um2): array 70.1 | readout 20.7 | bias 20.7 | softmax 22.5 | kscale x4 11.6 | vbbuf 4.6 | lsdn 0.1 |
+  bank 8.0 | digital 24.7 (170x145) = 183.1 = 80 % of 229.1k before channels.

@@ -1,0 +1,123 @@
+.SUBCKT sky130_fd_sc_hvl__and2_1 A B VGND VNB VPB VPWR X
+XMMP0 y A VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMP1 y B VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMIP0 X y VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=1
+XMMN0 y A sndA VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMN1 sndA B VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMIN0 X y VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+.ENDS sky130_fd_sc_hvl__and2_1
+.SUBCKT sky130_fd_sc_hvl__and3_1 A B C VGND VNB VPB VPWR X
+XMMP0 y A VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMP1 y B VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMP2 y C VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMIP0 X y VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=1
+XMMN0 y A sndA VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMN1 sndA B sndB VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMN2 sndB C VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMMIN0 X y VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+.ENDS sky130_fd_sc_hvl__and3_1
+.SUBCKT sky130_fd_sc_hvl__buf_8 A VGND VNB VPB VPWR X
+XMMIN1 Ab A VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=3
+XMMIN2 X Ab VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=8
+XMMIP1 Ab A VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=3
+XMMIP2 X Ab VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=8
+.ENDS sky130_fd_sc_hvl__buf_8
+.SUBCKT sky130_fd_sc_hvl__dfxtp_1 CLK D VGND VNB VPB VPWR Q
+XMI657 M0 clkpos net72 VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI656 net72 M1 VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI646 Q S1 VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+XMI648 db clkneg M0 VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI654 db D VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI642 S0 clkneg net48 VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI641 net48 S1 VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI652 M1 clkpos S0 VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI649 S1 S0 VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+XMI635 clkneg CLK VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI636 clkpos clkneg VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI634 M1 M0 VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+XMI659 M0 clkneg net100 VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI650 S1 S0 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.0 L=0.5 m=1
+XMI644 S0 clkpos net119 VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI639 M1 M0 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.0 L=0.5 m=1
+XMI643 net119 S1 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI638 clkneg CLK VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.75 L=0.5 m=1
+XMI658 net100 M1 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI645 Q S1 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=1
+XMI651 db clkpos M0 VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI655 db D VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI653 M1 clkneg S0 VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.0 L=0.5 m=1
+XMI637 clkpos clkneg VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.75 L=0.5 m=1
+.ENDS sky130_fd_sc_hvl__dfxtp_1
+.SUBCKT sky130_fd_sc_hvl__inv_1 A VGND VNB VPB VPWR Y
+XMMIP1 Y A VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=1
+XMMIN1 Y A VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+.ENDS sky130_fd_sc_hvl__inv_1
+.subckt rt5w_hvif cfg_sdat cfg_sclk wsel_a0 wsel_a1 wsel_a2 wsel_a3 wsel_a4 wsel_e q0_0 q0_1 q0_2 q0_3 q1_0 q1_1 q1_2 q1_3 q2_0 q2_1 q2_2 q2_3 q3_0 q3_1 q3_2 q3_3 k0_0 k0_1 k0_2 k0_3 k1_0 k1_1 k1_2 k1_3 k2_0 k2_1 k2_2 k2_3 k3_0 k3_1 k3_2 k3_3 wsel0 wsel1 wsel2 wsel3 wsel4 wsel5 wsel6 wsel7 wsel8 wsel9 wsel10 wsel11 wsel12 wsel13 wsel14 wsel15 wsel16 wsel17 wsel18 wsel19 vdd vss
+Xxck cfg_sclk vss vss vdd vdd sclk_b sky130_fd_sc_hvl__buf_8
+Xxff0 sclk_b cfg_sdat vss vss vdd vdd q0_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff1 sclk_b q0_0 vss vss vdd vdd q0_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff2 sclk_b q0_1 vss vss vdd vdd q0_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff3 sclk_b q0_2 vss vss vdd vdd q0_3 sky130_fd_sc_hvl__dfxtp_1
+Xxff4 sclk_b q0_3 vss vss vdd vdd q1_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff5 sclk_b q1_0 vss vss vdd vdd q1_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff6 sclk_b q1_1 vss vss vdd vdd q1_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff7 sclk_b q1_2 vss vss vdd vdd q1_3 sky130_fd_sc_hvl__dfxtp_1
+Xxff8 sclk_b q1_3 vss vss vdd vdd q2_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff9 sclk_b q2_0 vss vss vdd vdd q2_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff10 sclk_b q2_1 vss vss vdd vdd q2_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff11 sclk_b q2_2 vss vss vdd vdd q2_3 sky130_fd_sc_hvl__dfxtp_1
+Xxff12 sclk_b q2_3 vss vss vdd vdd q3_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff13 sclk_b q3_0 vss vss vdd vdd q3_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff14 sclk_b q3_1 vss vss vdd vdd q3_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff15 sclk_b q3_2 vss vss vdd vdd q3_3 sky130_fd_sc_hvl__dfxtp_1
+Xxff16 sclk_b q3_3 vss vss vdd vdd k0_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff17 sclk_b k0_0 vss vss vdd vdd k0_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff18 sclk_b k0_1 vss vss vdd vdd k0_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff19 sclk_b k0_2 vss vss vdd vdd k0_3 sky130_fd_sc_hvl__dfxtp_1
+Xxff20 sclk_b k0_3 vss vss vdd vdd k1_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff21 sclk_b k1_0 vss vss vdd vdd k1_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff22 sclk_b k1_1 vss vss vdd vdd k1_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff23 sclk_b k1_2 vss vss vdd vdd k1_3 sky130_fd_sc_hvl__dfxtp_1
+Xxff24 sclk_b k1_3 vss vss vdd vdd k2_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff25 sclk_b k2_0 vss vss vdd vdd k2_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff26 sclk_b k2_1 vss vss vdd vdd k2_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff27 sclk_b k2_2 vss vss vdd vdd k2_3 sky130_fd_sc_hvl__dfxtp_1
+Xxff28 sclk_b k2_3 vss vss vdd vdd k3_0 sky130_fd_sc_hvl__dfxtp_1
+Xxff29 sclk_b k3_0 vss vss vdd vdd k3_1 sky130_fd_sc_hvl__dfxtp_1
+Xxff30 sclk_b k3_1 vss vss vdd vdd k3_2 sky130_fd_sc_hvl__dfxtp_1
+Xxff31 sclk_b k3_2 vss vss vdd vdd k3_3 sky130_fd_sc_hvl__dfxtp_1
+Xxinv0 wsel_a0 vss vss vdd vdd na0 sky130_fd_sc_hvl__inv_1
+Xxinv1 wsel_a1 vss vss vdd vdd na1 sky130_fd_sc_hvl__inv_1
+Xxinv2 wsel_a2 vss vss vdd vdd na2 sky130_fd_sc_hvl__inv_1
+Xxinv3 wsel_a3 vss vss vdd vdd na3 sky130_fd_sc_hvl__inv_1
+Xxinv4 wsel_a4 vss vss vdd vdd na4 sky130_fd_sc_hvl__inv_1
+Xxlo0 wsel_e na1 na0 vss vss vdd vdd lo0 sky130_fd_sc_hvl__and3_1
+Xxlo1 wsel_e na1 wsel_a0 vss vss vdd vdd lo1 sky130_fd_sc_hvl__and3_1
+Xxlo2 wsel_e wsel_a1 na0 vss vss vdd vdd lo2 sky130_fd_sc_hvl__and3_1
+Xxlo3 wsel_e wsel_a1 wsel_a0 vss vss vdd vdd lo3 sky130_fd_sc_hvl__and3_1
+Xxhi0 na4 na3 na2 vss vss vdd vdd hi0 sky130_fd_sc_hvl__and3_1
+Xxhi1 na4 na3 wsel_a2 vss vss vdd vdd hi1 sky130_fd_sc_hvl__and3_1
+Xxhi2 na4 wsel_a3 na2 vss vss vdd vdd hi2 sky130_fd_sc_hvl__and3_1
+Xxhi3 na4 wsel_a3 wsel_a2 vss vss vdd vdd hi3 sky130_fd_sc_hvl__and3_1
+Xxhi4 wsel_a4 na3 na2 vss vss vdd vdd hi4 sky130_fd_sc_hvl__and3_1
+Xxw0 hi0 lo0 vss vss vdd vdd wsel0 sky130_fd_sc_hvl__and2_1
+Xxw1 hi0 lo1 vss vss vdd vdd wsel1 sky130_fd_sc_hvl__and2_1
+Xxw2 hi0 lo2 vss vss vdd vdd wsel2 sky130_fd_sc_hvl__and2_1
+Xxw3 hi0 lo3 vss vss vdd vdd wsel3 sky130_fd_sc_hvl__and2_1
+Xxw4 hi1 lo0 vss vss vdd vdd wsel4 sky130_fd_sc_hvl__and2_1
+Xxw5 hi1 lo1 vss vss vdd vdd wsel5 sky130_fd_sc_hvl__and2_1
+Xxw6 hi1 lo2 vss vss vdd vdd wsel6 sky130_fd_sc_hvl__and2_1
+Xxw7 hi1 lo3 vss vss vdd vdd wsel7 sky130_fd_sc_hvl__and2_1
+Xxw8 hi2 lo0 vss vss vdd vdd wsel8 sky130_fd_sc_hvl__and2_1
+Xxw9 hi2 lo1 vss vss vdd vdd wsel9 sky130_fd_sc_hvl__and2_1
+Xxw10 hi2 lo2 vss vss vdd vdd wsel10 sky130_fd_sc_hvl__and2_1
+Xxw11 hi2 lo3 vss vss vdd vdd wsel11 sky130_fd_sc_hvl__and2_1
+Xxw12 hi3 lo0 vss vss vdd vdd wsel12 sky130_fd_sc_hvl__and2_1
+Xxw13 hi3 lo1 vss vss vdd vdd wsel13 sky130_fd_sc_hvl__and2_1
+Xxw14 hi3 lo2 vss vss vdd vdd wsel14 sky130_fd_sc_hvl__and2_1
+Xxw15 hi3 lo3 vss vss vdd vdd wsel15 sky130_fd_sc_hvl__and2_1
+Xxw16 hi4 lo0 vss vss vdd vdd wsel16 sky130_fd_sc_hvl__and2_1
+Xxw17 hi4 lo1 vss vss vdd vdd wsel17 sky130_fd_sc_hvl__and2_1
+Xxw18 hi4 lo2 vss vss vdd vdd wsel18 sky130_fd_sc_hvl__and2_1
+Xxw19 hi4 lo3 vss vss vdd vdd wsel19 sky130_fd_sc_hvl__and2_1
+.ends

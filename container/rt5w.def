@@ -1,0 +1,34 @@
+# Apptainer (Singularity) recipe for HPC (e.g. TACC): one .sif file, no root needed at run time.
+#   From the published image:   apptainer build rt5w.sif container/rt5w.def
+#   From a local Docker build:  sed -i 's|^Bootstrap: docker$|Bootstrap: docker-daemon|; s|^From: .*|From: rt5w-tt:latest|' rt5w.def
+#   Run:                        apptainer exec rt5w.sif make emu      (inside your checkout; it is bind-mounted as $PWD)
+#                               apptainer run rt5w.sif python examples/illustrated_transformer.py --backend ngspice
+Bootstrap: docker
+From: ghcr.io/OWNER/rt5w-tt:latest
+
+%environment
+    . /opt/rt5w/env.sh
+    export RT5W_PDK=/opt/rt5w/.pdk
+    export GF180_MODELS=/opt/rt5w/.pdk/gf180mcu_fd_pr/models/ngspice
+
+%runscript
+    exec "$@"
+
+%test
+    . /opt/rt5w/env.sh
+    ngspice --version | grep -m1 -i "ngspice-"
+    verilator --version
+    iverilog -V 2>&1 | head -1
+    yosys -V
+    cocotb-config --libpython >/dev/null
+    python - <<'EOF'
+from importlib.metadata import version as v
+import cocotb, PySpice, serial, staliro, rtamt
+from PySpice.Spice.NgSpice.Shared import NgSpiceShared
+# conda-forge's cocotb build records 0.0.0 as its metadata version; the conda package is 2.1.x (pixi list cocotb)
+print("PySpice", v("PySpice"), "| psy-taliro", v("psy-taliro"), "| rtamt", v("rtamt"), "| pyserial", v("pyserial"))
+EOF
+
+%labels
+    org.opencontainers.image.title RT5W TinyTapeout toolchain
+    org.opencontainers.image.source https://github.com/OWNER/rt5w_tt

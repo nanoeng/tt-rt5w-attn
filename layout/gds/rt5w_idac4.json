@@ -1,0 +1,184 @@
+{
+ "block": "rt5w_idac4",
+ "gds": "layout/gds/rt5w_idac4.gds",
+ "width": 42.86,
+ "height": 46.485,
+ "origin": [
+  -2.6,
+  -46.485
+ ],
+ "pairs": 2,
+ "spine": 12,
+ "devices": 16,
+ "device_area_um2": 545,
+ "shorts": 0,
+ "pair_info": [
+  {
+   "chan_tracks": 7,
+   "band": 0,
+   "top_h": 7.015,
+   "bot_h": 7.015,
+   "top_w": 27.72,
+   "bot_w": 27.72,
+   "n_nets": 12,
+   "ports": [
+    "nd"
+   ],
+   "spine_ports": [
+    "nd"
+   ],
+   "spines_through": 12
+  },
+  {
+   "chan_tracks": 11,
+   "band": 0,
+   "top_h": 7.015,
+   "bot_h": 1.09,
+   "top_w": 30.15,
+   "bot_w": 12.96,
+   "n_nets": 21,
+   "ports": [
+    "b0",
+    "b1",
+    "b2",
+    "b3",
+    "col"
+   ],
+   "spine_ports": [],
+   "spines_through": 12
+  }
+ ],
+ "ports": [
+  "nd",
+  "b0",
+  "b1",
+  "b2",
+  "b3",
+  "col",
+  "vss"
+ ],
+ "pins": [
+  {
+   "net": "nd",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -10.355,
+   "side": "R"
+  },
+  {
+   "net": "col",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -36.865,
+   "side": "R"
+  },
+  {
+   "net": "b0",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -35.505,
+   "side": "R"
+  },
+  {
+   "net": "b1",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -38.225,
+   "side": "R"
+  },
+  {
+   "net": "b2",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -37.545,
+   "side": "R"
+  },
+  {
+   "net": "b3",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -36.185,
+   "side": "R"
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -0.45,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -0.45,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -24.24,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -24.24,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -24.24,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -24.24,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -46.035,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 40.26,
+   "y": -46.035,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vdd",
+   "layer": "met4",
+   "x": -1.6,
+   "y": -23.2425,
+   "side": "L",
+   "width": 1.6
+  },
+  {
+   "net": "vss",
+   "layer": "met4",
+   "x": 39.26,
+   "y": -23.2425,
+   "side": "R",
+   "width": 1.6
+  }
+ ]
+}

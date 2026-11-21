@@ -1,0 +1,151 @@
+{
+ "block": "rt5w_vbbuf",
+ "gds": "layout/gds/rt5w_vbbuf.gds",
+ "width": 117.4,
+ "height": 39.585,
+ "origin": [
+  -2.6,
+  -39.585
+ ],
+ "pairs": 2,
+ "spine": 5,
+ "devices": 21,
+ "device_area_um2": 1176,
+ "shorts": 0,
+ "pair_info": [
+  {
+   "chan_tracks": 8,
+   "band": 0,
+   "top_h": 8.905,
+   "bot_h": 3.675,
+   "top_w": 101.8,
+   "bot_w": 62.39
+  },
+  {
+   "chan_tracks": 4,
+   "band": 0,
+   "top_h": 4.645,
+   "bot_h": 0.0,
+   "top_w": 106.39,
+   "bot_w": 0.0
+  }
+ ],
+ "ports": [
+  "vb",
+  "vbn",
+  "en",
+  "pad",
+  "vdd",
+  "vss"
+ ],
+ "pins": [
+  {
+   "net": "pad",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -13.605,
+   "side": "L"
+  },
+  {
+   "net": "en",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -12.245,
+   "side": "L"
+  },
+  {
+   "net": "vbn",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -12.925,
+   "side": "L"
+  },
+  {
+   "net": "vb",
+   "layer": "met3",
+   "x": 114.8,
+   "y": -12.925,
+   "side": "R"
+  },
+  {
+   "net": "vdd",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -0.45,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vdd",
+   "layer": "met3",
+   "x": 114.8,
+   "y": -0.45,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -24.47,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 114.8,
+   "y": -24.47,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -24.47,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 114.8,
+   "y": -24.47,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -39.135,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 114.8,
+   "y": -39.135,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vdd",
+   "layer": "met4",
+   "x": -1.6,
+   "y": -19.7925,
+   "side": "L",
+   "width": 1.6
+  },
+  {
+   "net": "vss",
+   "layer": "met4",
+   "x": 113.8,
+   "y": -19.7925,
+   "side": "R",
+   "width": 1.6
+  }
+ ]
+}

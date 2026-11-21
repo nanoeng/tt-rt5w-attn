@@ -1,0 +1,314 @@
+{
+ "block": "rt5w_ctrl",
+ "gds": "layout/gds/rt5w_ctrl.gds",
+ "width": 330.0,
+ "height": 82.0,
+ "origin": [
+  0.0,
+  0.0
+ ],
+ "cells": 1281,
+ "pins": [
+  {
+   "net": "adc_ch[0]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 52.02,
+   "side": "R"
+  },
+  {
+   "net": "adc_ch[1]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 46.58,
+   "side": "R"
+  },
+  {
+   "net": "adc_ch[2]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 40.46,
+   "side": "R"
+  },
+  {
+   "net": "adc_ch[3]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 39.78,
+   "side": "R"
+  },
+  {
+   "net": "adc_cmp",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 41.14,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[0]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 41.82,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[1]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 47.26,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[2]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 37.74,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[3]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 37.06,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[4]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 49.98,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[5]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 36.38,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[6]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 47.94,
+   "side": "R"
+  },
+  {
+   "net": "adc_dac[7]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 35.02,
+   "side": "R"
+  },
+  {
+   "net": "adc_lat",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 43.18,
+   "side": "R"
+  },
+  {
+   "net": "adc_rst",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 34.34,
+   "side": "R"
+  },
+  {
+   "net": "bias_en",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 33.66,
+   "side": "R"
+  },
+  {
+   "net": "cfg_sclk",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 32.98,
+   "side": "R"
+  },
+  {
+   "net": "cfg_sdat",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 43.86,
+   "side": "R"
+  },
+  {
+   "net": "clk",
+   "layer": "met2",
+   "x": 330.0,
+   "y": 48.62,
+   "side": "R"
+  },
+  {
+   "net": "pump_dn[1]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 51.34,
+   "side": "R"
+  },
+  {
+   "net": "pump_dn[2]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 38.42,
+   "side": "R"
+  },
+  {
+   "net": "pump_dn[3]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 44.54,
+   "side": "R"
+  },
+  {
+   "net": "pump_up[0]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 32.3,
+   "side": "R"
+  },
+  {
+   "net": "pump_up[1]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 50.66,
+   "side": "R"
+  },
+  {
+   "net": "pump_up[2]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 45.9,
+   "side": "R"
+  },
+  {
+   "net": "pump_up[3]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 45.22,
+   "side": "R"
+  },
+  {
+   "net": "rst_n",
+   "layer": "met2",
+   "x": 330.0,
+   "y": 30.94,
+   "side": "R"
+  },
+  {
+   "net": "wsel_a[0]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 30.26,
+   "side": "R"
+  },
+  {
+   "net": "wsel_a[1]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 42.5,
+   "side": "R"
+  },
+  {
+   "net": "wsel_a[2]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 49.3,
+   "side": "R"
+  },
+  {
+   "net": "wsel_a[3]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 31.62,
+   "side": "R"
+  },
+  {
+   "net": "wsel_a[4]",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 39.1,
+   "side": "R"
+  },
+  {
+   "net": "wsel_e",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 35.7,
+   "side": "R"
+  },
+  {
+   "net": "vdpwr",
+   "layer": "met3",
+   "x": 0.0,
+   "y": 74.94,
+   "side": "L",
+   "ring": true
+  },
+  {
+   "net": "vdpwr",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 74.94,
+   "side": "R",
+   "ring": true
+  },
+  {
+   "net": "vdpwr",
+   "layer": "met3",
+   "x": 0.0,
+   "y": 6.66,
+   "side": "L",
+   "ring": true
+  },
+  {
+   "net": "vdpwr",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 6.66,
+   "side": "R",
+   "ring": true
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 0.0,
+   "y": 76.94,
+   "side": "L",
+   "ring": true
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 76.94,
+   "side": "R",
+   "ring": true
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 0.0,
+   "y": 4.66,
+   "side": "L",
+   "ring": true
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 330.0,
+   "y": 4.66,
+   "side": "R",
+   "ring": true
+  }
+ ],
+ "timing": [
+  "worst slack 37.85",
+  "worst slack 0.34",
+  "tns 0.00"
+ ],
+ "route_drc": 0
+}

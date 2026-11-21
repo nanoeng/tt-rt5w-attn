@@ -1,0 +1,42 @@
+{
+ "rt5w_softmax": {
+  "devices": 241,
+  "caps": 264,
+  "c_total_pF": 1.569
+ },
+ "rt5w_readout": {
+  "devices": 542,
+  "caps": 1788,
+  "c_total_pF": 2.169
+ },
+ "rt5w_bias": {
+  "devices": 321,
+  "caps": 619,
+  "c_total_pF": 1.881
+ },
+ "rt5w_kscale": {
+  "devices": 75,
+  "caps": 216,
+  "c_total_pF": 0.29
+ },
+ "rt5w_vbbuf": {
+  "devices": 55,
+  "caps": 69,
+  "c_total_pF": 0.377
+ },
+ "rt5w_array": {
+  "devices": 480,
+  "caps": 3075,
+  "c_total_pF": 4.278
+ },
+ "rt5w_keycell": {
+  "devices": 18,
+  "caps": 99,
+  "c_total_pF": 0.153
+ },
+ "rt5w_coldiode": {
+  "devices": 2,
+  "caps": 6,
+  "c_total_pF": 0.021
+ }
+}

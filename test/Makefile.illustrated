@@ -1,0 +1,24 @@
+# Illustrated-Transformer examples, firmware-in-the-loop on the RTL.
+#   make -f Makefile.illustrated                     # Icarus
+#   make -f Makefile.illustrated SIM=verilator       # Verilator (>= 5.036 for cocotb 2.x)
+#   make -f Makefile.illustrated WAVES=1             # Icarus: sim_build/illustrated_icarus/tb.fst
+#   make -f Makefile.illustrated SIM=verilator WAVES=1   # Verilator: ../waves/illustrated_verilator.fst
+#   gtkwave ../waves/rt5w_illustrated.gtkw          # pre-arranged signal view (edit the dumpfile line for Verilator)
+SIM ?= icarus
+TOPLEVEL_LANG ?= verilog
+SRC_DIR = $(CURDIR)/../src
+VERILOG_SOURCES = $(SRC_DIR)/project.v $(SRC_DIR)/rt5w_digital.v $(SRC_DIR)/rt5w_ctrl.v $(CURDIR)/rt5w_analog_beh.v $(CURDIR)/tb.v
+SIM_BUILD = sim_build/illustrated_$(SIM)
+TOPLEVEL = tb
+COCOTB_TEST_MODULES = test_illustrated
+ifeq ($(SIM),icarus)
+COMPILE_ARGS += -g2012
+endif
+ifeq ($(SIM),verilator)
+EXTRA_ARGS += --timing -Wno-fatal -Wno-lint -Wno-style -Wno-REALCVT -Wno-MULTIDRIVEN
+ifeq ($(WAVES),1)
+EXTRA_ARGS += --trace-fst --trace-structs
+SIM_ARGS += --trace --trace-file $(CURDIR)/../waves/illustrated_verilator.fst
+endif
+endif
+include $(shell cocotb-config --makefiles)/Makefile.sim

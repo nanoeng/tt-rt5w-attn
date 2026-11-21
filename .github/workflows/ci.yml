@@ -1,0 +1,103 @@
+# RT5W CI: build the toolchain image once, run every suite inside it, publish it (main only), and check
+# that the pixi lockfile also works natively without a container.
+name: ci
+
+# Manual only: builds the full pixi toolchain image (~GBs); the per-push checks are gds.yaml, docs.yaml, test.yaml.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/${{ github.repository_owner }}/rt5w-tt
+
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: meta
+        run: echo "tag=sha-${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+      - uses: docker/setup-buildx-action@v3
+      - name: Build (cached by pixi.lock)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: container/Dockerfile
+          tags: rt5w-tt:ci
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Save image for the test jobs
+        run: docker save rt5w-tt:ci | gzip -1 > rt5w-tt.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rt5w-tt-image
+          path: rt5w-tt.tar.gz
+          retention-days: 3
+
+  test:
+    needs: image
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [emu, rtl, rtl-vl, gl, corners, falsify, falsify-rtl, falsify-rtl-vl, cosim, cosim-vl]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: rt5w-tt-image
+      - run: gunzip -c rt5w-tt.tar.gz | docker load
+      - name: make ${{ matrix.target }} (offline, inside the image)
+        run: docker run --rm --network none rt5w-tt:ci make ${{ matrix.target }}
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [image, test]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: rt5w-tt-image
+      - run: gunzip -c rt5w-tt.tar.gz | docker load
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push latest + commit tag
+        run: |
+          IMG=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
+          for t in latest ${{ needs.image.outputs.tag }}; do
+            docker tag rt5w-tt:ci "$IMG:$t" && docker push "$IMG:$t"
+          done
+
+  apptainer:
+    needs: image
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: rt5w-tt-image
+      - uses: eWaterCycle/setup-apptainer@v2
+      - name: Build the .sif from the tested image and run its self-test
+        run: |
+          gunzip -c rt5w-tt.tar.gz > rt5w-tt.tar
+          sed -e 's|^Bootstrap: docker$|Bootstrap: docker-archive|' -e 's|^From: .*|From: rt5w-tt.tar|' container/rt5w.def > ci.def
+          apptainer build rt5w.sif ci.def
+          apptainer test rt5w.sif
+          apptainer exec rt5w.sif make emu
+
+  pixi-native:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: prefix-dev/setup-pixi@v0.8.1
+        with:
+          locked: true
+      - run: pixi run emu

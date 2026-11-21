@@ -1,0 +1,62 @@
+* from skywater-pdk-libs-sky130_fd_sc_hvl 4fd4f85 (CDL schematic), for simulation
+.SUBCKT sky130_fd_sc_hvl__lsbuflv2hv_1 A LVPWR VGND VNB VPB VPWR X
+XMI18 net81 cross1 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=1.0 m=1
+XMI7 Abb Ab LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=0.84 L=0.15 m=1
+XMI30 net65 cross1 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=1
+XMI15 X net65 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=1.5 L=0.5 m=1
+XMI19 cross1 net81 VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=1.0 m=1
+XMI27 Ab A LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=0.84 L=0.15 m=1
+XMI8 Abb Ab VGND VNB sky130_fd_pr__nfet_01v8 W=0.84 L=0.15 m=1
+XMI16 X net65 VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+XMI21 net81 Abb VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=1.5 L=0.5 m=5
+XMI22 cross1 Ab VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=1.5 L=0.5 m=5
+XMI28 Ab A VGND VNB sky130_fd_pr__nfet_01v8 W=0.84 L=0.15 m=1
+XMI29 net65 cross1 VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=1
+.ENDS sky130_fd_sc_hvl__lsbuflv2hv_1
+
+* from skywater-pdk-libs-sky130_fd_sc_hvl 4fd4f85 (CDL schematic), for simulation
+.SUBCKT sky130_fd_sc_hvl__lsbufhv2lv_1 A LVPWR VGND VNB VPB VPWR X
+XMI7 Abb Ab VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI35 cross1 cross2 LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=1.12 L=0.15 m=1
+XMI36 cross2 cross1 LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=1.12 L=0.15 m=1
+XMI34 X cross2 LVPWR LVPWR sky130_fd_pr__pfet_01v8_hvt W=1.12 L=0.15 m=1
+XMI27 Ab A VPWR VPB sky130_fd_pr__pfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI8 Abb Ab VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI21 cross2 Abb VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=4
+XMI22 cross1 Ab VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.75 L=0.5 m=4
+XMI28 Ab A VGND VNB sky130_fd_pr__nfet_g5v0d10v5 W=0.42 L=0.5 m=1
+XMI29 X cross2 VGND VNB sky130_fd_pr__nfet_01v8 W=0.74 L=0.15 m=1
+.ENDS sky130_fd_sc_hvl__lsbufhv2lv_1
+
+.subckt rt5w_lsbank pump_up2_lv pump_up2 pump_up1_lv pump_up1 pump_dn2_lv pump_dn2 pump_dn1_lv pump_dn1 pump_up3_lv pump_up3 pump_dn3_lv pump_dn3 cfg_sdat_lv cfg_sdat cfg_sclk_lv cfg_sclk wsel_a0_lv wsel_a0 wsel_a1_lv wsel_a1 wsel_a2_lv wsel_a2 wsel_a3_lv wsel_a3 wsel_a4_lv wsel_a4 wsel_e_lv wsel_e bias_en_lv bias_en adc_rst_lv adc_rst adc_lat_lv adc_lat adc_ch0_lv adc_ch0 adc_ch1_lv adc_ch1 vb_probe_en_lv vb_probe_en adc_ch2_lv adc_ch2 adc_ch3_lv adc_ch3 dac0_lv dac0 dac1_lv dac1 dac2_lv dac2 dac3_lv dac3 dac4_lv dac4 dac5_lv dac5 dac6_lv dac6 dac7_lv dac7 vdd vss vddl
+Xls0 pump_up2_lv vddl vss vss vdd vdd pump_up2 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls1 pump_up1_lv vddl vss vss vdd vdd pump_up1 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls2 pump_dn2_lv vddl vss vss vdd vdd pump_dn2 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls3 pump_dn1_lv vddl vss vss vdd vdd pump_dn1 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls4 pump_up3_lv vddl vss vss vdd vdd pump_up3 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls5 pump_dn3_lv vddl vss vss vdd vdd pump_dn3 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls6 cfg_sdat_lv vddl vss vss vdd vdd cfg_sdat sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls7 cfg_sclk_lv vddl vss vss vdd vdd cfg_sclk sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls8 wsel_a0_lv vddl vss vss vdd vdd wsel_a0 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls9 wsel_a1_lv vddl vss vss vdd vdd wsel_a1 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls10 wsel_a2_lv vddl vss vss vdd vdd wsel_a2 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls11 wsel_a3_lv vddl vss vss vdd vdd wsel_a3 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls12 wsel_a4_lv vddl vss vss vdd vdd wsel_a4 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls13 wsel_e_lv vddl vss vss vdd vdd wsel_e sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls14 bias_en_lv vddl vss vss vdd vdd bias_en sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls15 adc_rst_lv vddl vss vss vdd vdd adc_rst sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls16 adc_lat_lv vddl vss vss vdd vdd adc_lat sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls17 adc_ch0_lv vddl vss vss vdd vdd adc_ch0 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls18 adc_ch1_lv vddl vss vss vdd vdd adc_ch1 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls19 vb_probe_en_lv vddl vss vss vdd vdd vb_probe_en sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls20 adc_ch2_lv vddl vss vss vdd vdd adc_ch2 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls21 adc_ch3_lv vddl vss vss vdd vdd adc_ch3 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls22 dac0_lv vddl vss vss vdd vdd dac0 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls23 dac1_lv vddl vss vss vdd vdd dac1 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls24 dac2_lv vddl vss vss vdd vdd dac2 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls25 dac3_lv vddl vss vss vdd vdd dac3 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls26 dac4_lv vddl vss vss vdd vdd dac4 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls27 dac5_lv vddl vss vss vdd vdd dac5 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls28 dac6_lv vddl vss vss vdd vdd dac6 sky130_fd_sc_hvl__lsbuflv2hv_1
+Xls29 dac7_lv vddl vss vss vdd vdd dac7 sky130_fd_sc_hvl__lsbuflv2hv_1
+.ends

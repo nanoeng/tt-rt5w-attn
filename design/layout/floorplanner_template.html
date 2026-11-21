@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RT5W Tile Floorplanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* layout: a toolbar + summary strip on top, the die canvas filling the screen, an inspector below on phones / at the right on wide screens */
+  --paper: #f3f4f1;
+  --panel: #ffffff;
+  --ink: #1b2227;
+  --muted: #5f6b72;
+  --accent: #0d6a8c;
+  --line: #d3d8d6;
+  --die: #e8ece9;
+  --ok: #2f7d4f; --warn: #b26a00; --bad: #b3261e;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #12171a; --panel: #192024; --ink: #e3e8e6; --muted: #93a0a6; --accent: #4fb3d6;
+    --line: #2c363b; --die: #1d2529; --ok: #5fbf86; --warn: #e3a33c; --bad: #ef6b62; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #12171a; --panel: #192024; --ink: #e3e8e6; --muted: #93a0a6; --accent: #4fb3d6;
+  --line: #2c363b; --die: #1d2529; --ok: #5fbf86; --warn: #e3a33c; --bad: #ef6b62; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 14px/1.45 var(--f-body); display: flex; flex-direction: column; }
+header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; padding: 10px 16px 6px; }
+h1 { font-size: 17px; margin: 0; font-weight: 600; text-wrap: balance; }
+.sub { color: var(--muted); font-size: 12.5px; }
+.bar { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 16px 8px; align-items: center; }
+button, select, input[type=number] {
+  font: 500 13px var(--f-body); color: var(--ink); background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 10px; min-height: 34px; cursor: pointer;
+}
+input[type=number] { width: 84px; cursor: text; font-family: var(--f-mono); }
+button:hover { border-color: var(--accent); }
+button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button.primary { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+.stats { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 8px; }
+.chip { font: 500 12px var(--f-mono); font-variant-numeric: tabular-nums; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); }
+.chip.ok { color: var(--ok); border-color: var(--ok); } .chip.warn { color: var(--warn); border-color: var(--warn); } .chip.bad { color: var(--bad); border-color: var(--bad); }
+main { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 300px; gap: 0; }
+@media (max-width: 820px) { main { grid-template-columns: 1fr; grid-template-rows: minmax(300px, 1fr) auto; } }
+#wrap { position: relative; min-height: 0; overflow: hidden; border-top: 1px solid var(--line); touch-action: none; }
+svg#cv { width: 100%; height: 100%; display: block; user-select: none; -webkit-user-select: none; }
+aside { border-top: 1px solid var(--line); border-left: 1px solid var(--line); background: var(--panel); padding: 12px 16px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+aside h2 { font-size: 13px; margin: 0; text-transform: none; color: var(--muted); font-weight: 600; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font: 12.5px var(--f-mono); font-variant-numeric: tabular-nums; }
+.kv span:nth-child(odd) { color: var(--muted); }
+.nudge { display: grid; grid-template-columns: repeat(3, 44px); gap: 4px; }
+textarea { width: 100%; min-height: 110px; font: 11.5px var(--f-mono); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 6px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: var(--muted); }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.msg { font-size: 12px; color: var(--muted); min-height: 1.2em; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>RT5W tile floorplanner</h1>
+  <span class="sub" id="tileName"></span>
+</header>
+<div class="bar">
+  <label for="preset" class="sub">Tile</label>
+  <select id="preset"></select>
+  <label for="tw" class="sub">W</label><input type="number" id="tw" step="0.01">
+  <label for="th" class="sub">H</label><input type="number" id="th" step="0.01">
+  <label for="snap" class="sub">Snap</label>
+  <select id="snap"><option value="0.5">0.5 um</option><option value="1" selected>1 um</option><option value="5">5 um</option><option value="10">10 um</option></select>
+  <button id="fit">Fit view</button>
+  <button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">&minus;</button>
+  <button id="fly" aria-pressed="false">Show nets</button>
+  <button id="pack">Pack into tile</button>
+</div>
+<div class="stats" id="stats"></div>
+<main>
+  <div id="wrap"><svg id="cv" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <aside>
+    <h2>Selected block</h2>
+    <select id="pick" aria-label="Select block"></select>
+    <div class="kv" id="info"></div>
+    <div class="row">
+      <button id="mir">Mirror X</button><button id="rot">Rotate 180</button>
+    </div>
+    <div class="row" style="gap:12px;align-items:flex-start">
+      <div class="nudge" aria-label="Nudge selected block">
+        <span></span><button id="nu" aria-label="Up">&uarr;</button><span></span>
+        <button id="nl" aria-label="Left">&larr;</button><button id="nd" aria-label="Down">&darr;</button><button id="nr" aria-label="Right">&rarr;</button>
+      </div>
+      <div class="sub" style="max-width:150px">Drag blocks on the die. Arrows move the selection by one snap step.</div>
+    </div>
+    <h2>Export / import</h2>
+    <div class="row"><button class="primary" id="copy">Copy floorplan JSON</button><button id="apply">Apply pasted JSON</button></div>
+    <textarea id="json" spellcheck="false" aria-label="Floorplan JSON"></textarea>
+    <div class="msg" id="msg"></div>
+    <div class="legend" id="legend"></div>
+    <div class="sub">Next step: save the JSON as <code>layout/floorplan/floorplan.json</code> and run <code>make layout-top</code>. The router keeps to Metal3/Metal4 between blocks; leave about 8 um channels where many nets pass.</div>
+  </aside>
+</main>
+<script>
+const DATA = /*__FP_DATA__*/null;
+const DEFAULT = /*__FP_DEFAULT__*/null;
+const PRESETS = [
+  { name: "TT gf180mcuD analog 2x2", w: 711.2, h: 325.36 },
+  { name: "Study: 2 x the 2x2 width", w: 1422.4, h: 325.36 },
+  { name: "Study: 4x4 analog area", w: 1422.4, h: 650.72 }
+];
+const COLORS = {
+  rt5w_keycell: "#7aa6c2", rt5w_idac4: "#9cc59a", rt5w_coldiode: "#b9c98a", rt5w_trimcell: "#d8b56a",
+  rt5w_pumpinv: "#d0a07a", rt5w_kscale: "#a99bd0", rt5w_softmax: "#d48f8f", rt5w_bias: "#8fc4bd",
+  rt5w_readout: "#c79bc0", rt5w_vbbuf: "#c2b49a", rt5w_ctrl: "#9aa3ab"
+};
+const svg = document.getElementById("cv");
+const NS = "http://www.w3.org/2000/svg";
+let tile = { w: DEFAULT.tile.w, h: DEFAULT.tile.h };
+let P = JSON.parse(JSON.stringify(DEFAULT.placements));
+let sel = DATA.instances[0].path, view = null, showFly = false;
+const inst = Object.fromEntries(DATA.instances.map(i => [i.path, i]));
+
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function dims(path) { const b = DATA.blocks[inst[path].block]; return { w: b.w, h: b.h }; }
+function rect(path) { const p = P[path], d = dims(path); return { x: p.x, y: p.y, w: d.w, h: d.h }; }
+function pinXY(path, pin) {
+  const p = P[path], d = dims(path);
+  let x = pin.x, y = pin.y;
+  if (p.orient === "FN" || p.orient === "S") x = d.w - x;
+  if (p.orient === "S" || p.orient === "FS") y = d.h - y;
+  return { x: p.x + x, y: p.y + y };
+}
+function sy(y) { return tile.h - y; }     /* die y (up) -> svg y (down) */
+function overlaps() {
+  const keys = Object.keys(P), bad = new Set();
+  for (let i = 0; i < keys.length; i++) for (let j = i + 1; j < keys.length; j++) {
+    const a = rect(keys[i]), b = rect(keys[j]);
+    if (a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h) { bad.add(keys[i]); bad.add(keys[j]); }
+  }
+  return bad;
+}
+function outside(path) { const r = rect(path); return r.x < 0 || r.y < 0 || r.x + r.w > tile.w || r.y + r.h > tile.h; }
+function bounds() {
+  let x0 = 0, y0 = 0, x1 = tile.w, y1 = tile.h;
+  for (const k in P) { const r = rect(k); x0 = Math.min(x0, r.x); y0 = Math.min(y0, r.y); x1 = Math.max(x1, r.x + r.w); y1 = Math.max(y1, r.y + r.h); }
+  return { x0: x0 - 20, y0: y0 - 20, x1: x1 + 20, y1: y1 + 20 };
+}
+function fit() { const b = bounds(); view = { x: b.x0, y: sy(b.y1), w: b.x1 - b.x0, h: b.y1 - b.y0 }; draw(); }
+function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+function draw() {
+  svg.setAttribute("viewBox", `${view.x} ${view.y} ${view.w} ${view.h}`);
+  svg.innerHTML = "";
+  const ink = cssVar("--ink"), muted = cssVar("--muted"), line = cssVar("--line");
+  const fs = Math.max(view.w / 140, 2.2);
+  el("rect", { x: 0, y: 0, width: tile.w, height: tile.h, fill: cssVar("--die"), stroke: ink, "stroke-width": fs * 0.12 }, svg);
+  for (let gx = 50; gx < tile.w; gx += 50) el("line", { x1: gx, y1: 0, x2: gx, y2: tile.h, stroke: line, "stroke-width": fs * 0.05 }, svg);
+  for (let gy = 50; gy < tile.h; gy += 50) el("line", { x1: 0, y1: sy(gy), x2: tile.w, y2: sy(gy), stroke: line, "stroke-width": fs * 0.05 }, svg);
+  for (const p of DATA.tt_pins) {
+    const ana = p.name.startsWith("ua");
+    el("rect", { x: p.x, y: sy(p.y + p.h), width: p.w, height: p.h, fill: ana ? cssVar("--accent") : muted }, svg);
+    if (ana) { const t = el("text", { x: p.x + p.w / 2, y: sy(p.y) + fs * 1.1, "font-size": fs * 0.8, "text-anchor": "middle", fill: cssVar("--accent"), "font-family": "IBM Plex Mono, monospace" }, svg); t.textContent = p.name; }
+  }
+  const bad = overlaps();
+  for (const k in P) {
+    const r = rect(k), b = DATA.blocks[inst[k].block];
+    const g = el("g", { "data-path": k, style: "cursor:grab" }, svg);
+    const stroke = bad.has(k) ? cssVar("--bad") : outside(k) ? cssVar("--warn") : (k === sel ? cssVar("--accent") : ink);
+    el("rect", { x: r.x, y: sy(r.y + r.h), width: r.w, height: r.h, fill: COLORS[inst[k].block] || "#aaa", "fill-opacity": 0.55,
+                 stroke, "stroke-width": (k === sel || bad.has(k) || outside(k)) ? fs * 0.35 : fs * 0.1,
+                 "stroke-dasharray": b.placeholder ? `${fs} ${fs * 0.6}` : "none" }, g);
+    for (const pin of b.pins) {
+      const q = pinXY(k, pin);
+      el("circle", { cx: q.x, cy: sy(q.y), r: Math.min(1.2, fs * 0.25), fill: pin.net === "vdd" ? "#c0392b" : pin.net === "vss" ? "#2c3e50" : ink }, g);
+    }
+    if (r.w > fs * 3) {
+      const t = el("text", { x: r.x + r.w / 2, y: sy(r.y + r.h / 2) + fs * 0.35, "font-size": Math.min(fs, r.w / 6), "text-anchor": "middle", fill: ink, "font-family": "IBM Plex Mono, monospace", "pointer-events": "none" }, g);
+      t.textContent = k.replace(/^x/, "").replace("arr/", "");
+    }
+  }
+  if (showFly && sel) drawFly();
+  stats(bad);
+  info();
+}
+function netPins() {
+  const m = {};
+  for (const k in P) {
+    const i = inst[k], b = DATA.blocks[i.block];
+    for (const pin of b.pins) {
+      const net = (i.conn && i.conn[pin.net]) || null;
+      if (!net || net === "vdd" || net === "vss") continue;
+      (m[net] = m[net] || []).push({ path: k, pin });
+    }
+  }
+  return m;
+}
+function drawFly() {
+  const m = netPins(), i = inst[sel];
+  const nets = new Set(Object.values(i.conn || {}).filter(n => n !== "vdd" && n !== "vss"));
+  const fs = Math.max(view.w / 140, 2.2);
+  for (const n of nets) {
+    const pts = (m[n] || []).map(e => pinXY(e.path, e.pin));
+    const tt = DATA.tt_pins.find(p => p.name === n.replace(/^ua(\d)$/, "ua[$1]"));
+    if (tt) pts.push({ x: tt.x + tt.w / 2, y: tt.y + tt.h });
+    for (let a = 1; a < pts.length; a++)
+      el("line", { x1: pts[0].x, y1: sy(pts[0].y), x2: pts[a].x, y2: sy(pts[a].y), stroke: cssVar("--accent"), "stroke-width": fs * 0.12, "stroke-opacity": 0.8 }, svg);
+  }
+}
+function stats(bad) {
+  let area = 0, out = 0;
+  for (const k in P) { const r = rect(k); area += r.w * r.h; if (outside(k)) out++; }
+  const util = area / (tile.w * tile.h);
+  const s = document.getElementById("stats");
+  const n = Object.keys(P).length;
+  s.innerHTML = "";
+  const chip = (t, c) => { const e = document.createElement("span"); e.className = "chip " + c; e.textContent = t; s.appendChild(e); };
+  chip(`${n} blocks`, "");
+  chip(`block area ${(area / 1000).toFixed(1)}k um2 = ${(util * 100).toFixed(0)} % of tile`, util > 0.75 ? "bad" : util > 0.6 ? "warn" : "ok");
+  chip(`${bad.size} overlapping`, bad.size ? "bad" : "ok");
+  chip(`${out} outside the tile`, out ? "warn" : "ok");
+  document.getElementById("json").value = JSON.stringify(exportJSON(), null, 1);
+}
+function info() {
+  const i = inst[sel], b = DATA.blocks[i.block], p = P[sel];
+  const kv = document.getElementById("info");
+  const rows = [["instance", sel], ["block", i.block], ["size", `${b.w.toFixed(1)} x ${b.h.toFixed(1)} um`],
+                ["at", `(${p.x.toFixed(1)}, ${p.y.toFixed(1)}) ${p.orient}`], ["pins", b.pins.length],
+                ["devices", b.devices ?? "-"]];
+  if (b.placeholder) rows.push(["note", "estimate until hardened"]);
+  kv.innerHTML = rows.map(([a, v]) => `<span>${a}</span><span>${v}</span>`).join("");
+  document.getElementById("pick").value = sel;
+}
+function exportJSON() {
+  const pl = {};
+  for (const k of Object.keys(P).sort()) pl[k] = { x: +P[k].x.toFixed(3), y: +P[k].y.toFixed(3), orient: P[k].orient };
+  return { tile: { w: tile.w, h: tile.h }, placements: pl };
+}
+function snapv(v) { const s = +document.getElementById("snap").value; return Math.round(v / s) * s; }
+function setMsg(t) { document.getElementById("msg").textContent = t; }
+
+/* dragging: pointer events (mouse, pen, touch) */
+let drag = null;
+function svgPt(ev) { const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY; return pt.matrixTransform(svg.getScreenCTM().inverse()); }
+svg.addEventListener("pointerdown", ev => {
+  const g = ev.target.closest("g[data-path]");
+  const pt = svgPt(ev);
+  if (g) {
+    sel = g.getAttribute("data-path");
+    drag = { kind: "block", path: sel, dx: pt.x - P[sel].x, dy: (tile.h - pt.y) - P[sel].y };
+  } else {
+    drag = { kind: "pan", x: ev.clientX, y: ev.clientY, v: { ...view } };
+  }
+  svg.setPointerCapture(ev.pointerId);
+  draw();
+});
+svg.addEventListener("pointermove", ev => {
+  if (!drag) return;
+  if (drag.kind === "block") {
+    const pt = svgPt(ev);
+    P[drag.path].x = snapv(pt.x - drag.dx);
+    P[drag.path].y = snapv((tile.h - pt.y) - drag.dy);
+    draw();
+  } else {
+    const r = svg.getBoundingClientRect(), k = view.w / r.width;
+    view.x = drag.v.x - (ev.clientX - drag.x) * k; view.y = drag.v.y - (ev.clientY - drag.y) * k;
+    svg.setAttribute("viewBox", `${view.x} ${view.y} ${view.w} ${view.h}`);
+  }
+});
+svg.addEventListener("pointerup", () => { drag = null; });
+svg.addEventListener("pointercancel", () => { drag = null; });
+svg.addEventListener("wheel", ev => { ev.preventDefault(); zoom(ev.deltaY < 0 ? 0.85 : 1.18); }, { passive: false });
+function zoom(f) { const cx = view.x + view.w / 2, cy = view.y + view.h / 2; view.w *= f; view.h *= f; view.x = cx - view.w / 2; view.y = cy - view.h / 2; draw(); }
+
+function nudge(dx, dy) { const s = +document.getElementById("snap").value; P[sel].x += dx * s; P[sel].y += dy * s; draw(); }
+document.getElementById("nu").onclick = () => nudge(0, 1);
+document.getElementById("nd").onclick = () => nudge(0, -1);
+document.getElementById("nl").onclick = () => nudge(-1, 0);
+document.getElementById("nr").onclick = () => nudge(1, 0);
+document.addEventListener("keydown", ev => {
+  if (ev.target.tagName === "TEXTAREA" || ev.target.tagName === "INPUT") return;
+  const m = { ArrowUp: [0, 1], ArrowDown: [0, -1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[ev.key];
+  if (m) { ev.preventDefault(); nudge(...m); }
+  if (ev.key === "m") mirror();
+  if (ev.key === "r") rot();
+});
+function mirror() { const o = P[sel].orient; P[sel].orient = { N: "FN", FN: "N", S: "FS", FS: "S" }[o]; draw(); }
+function rot() { const o = P[sel].orient; P[sel].orient = { N: "S", S: "N", FN: "FS", FS: "FN" }[o]; draw(); }
+document.getElementById("mir").onclick = mirror;
+document.getElementById("rot").onclick = rot;
+document.getElementById("fit").onclick = fit;
+document.getElementById("zin").onclick = () => zoom(0.8);
+document.getElementById("zout").onclick = () => zoom(1.25);
+document.getElementById("fly").onclick = ev => { showFly = !showFly; ev.target.setAttribute("aria-pressed", showFly); ev.target.textContent = showFly ? "Hide nets" : "Show nets"; draw(); };
+function pack() {          /* shelf packing, largest first, 14 um channels, into the current tile */
+  const gap = 14, m = 16, ids = Object.keys(P).sort((a, b) => { const A = dims(a), B = dims(b); return B.w * B.h - A.w * A.h; });
+  let x = m, y = m, shelf = 0;
+  for (const k of ids) { const d = dims(k);
+    if (x + d.w > tile.w - m && x > m) { x = m; y += shelf + gap; shelf = 0; }
+    P[k] = { x, y, orient: "N" }; x += d.w + gap; shelf = Math.max(shelf, d.h); }
+}
+document.getElementById("pack").onclick = () => { pack(); fit(); setMsg(`Packed into ${tile.w} x ${tile.h} um with 14 um routing channels.`); };
+document.getElementById("pick").onchange = ev => { sel = ev.target.value; draw(); };
+document.getElementById("copy").onclick = async () => {
+  const txt = JSON.stringify(exportJSON(), null, 1);
+  try { await navigator.clipboard.writeText(txt); setMsg("Floorplan JSON copied."); }
+  catch (e) { const t = document.getElementById("json"); t.focus(); t.select(); setMsg("Copy was blocked here: the JSON is selected in the box, copy it from there."); }
+};
+document.getElementById("apply").onclick = () => {
+  try {
+    const d = JSON.parse(document.getElementById("json").value);
+    for (const k in d.placements) if (P[k]) P[k] = { x: +d.placements[k].x, y: +d.placements[k].y, orient: d.placements[k].orient || "N" };
+    if (d.tile) { tile = { w: +d.tile.w, h: +d.tile.h }; syncTile(); }
+    fit(); setMsg("Applied.");
+  } catch (e) { setMsg("That is not valid floorplan JSON: " + e.message); }
+};
+function syncTile() { document.getElementById("tw").value = tile.w; document.getElementById("th").value = tile.h;
+  const p = PRESETS.find(p => p.w === tile.w && p.h === tile.h);
+  document.getElementById("tileName").textContent = `${p ? p.name : "custom"} - ${tile.w} x ${tile.h} um, ${DATA.tt_pins.length} TT pins`; }
+const presetSel = document.getElementById("preset");
+PRESETS.forEach((p, i) => { const o = document.createElement("option"); o.value = i; o.textContent = p.name; presetSel.appendChild(o); });
+presetSel.onchange = () => { const p = PRESETS[+presetSel.value]; tile = { w: p.w, h: p.h }; syncTile(); fit(); };
+document.getElementById("tw").onchange = ev => { tile.w = +ev.target.value; syncTile(); fit(); };
+document.getElementById("th").onchange = ev => { tile.h = +ev.target.value; syncTile(); fit(); };
+const pick = document.getElementById("pick");
+for (const i of DATA.instances) { const o = document.createElement("option"); o.value = i.path; o.textContent = `${i.path}  (${i.block.replace("rt5w_", "")})`; pick.appendChild(o); }
+document.getElementById("legend").innerHTML = Object.entries(COLORS).map(([k, c]) => `<span><span class="sw" style="background:${c}"></span>${k.replace("rt5w_", "")}</span>`).join("");
+window.addEventListener("resize", () => draw());
+syncTile();
+fit();
+</script>
+</body>
+</html>

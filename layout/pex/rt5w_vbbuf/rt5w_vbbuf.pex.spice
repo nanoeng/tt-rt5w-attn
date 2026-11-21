@@ -1,0 +1,128 @@
+* NGSPICE file created from rt5w_vbbuf.ext - technology: sky130A
+
+.subckt rt5w_vbbuf pad en vbn vb vdd vss
+X0 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X1 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X2 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X3 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.6496 pd=5.06 as=0.3248 ps=2.53 w=2.24 l=4
+X4 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X5 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X6 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X7 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X8 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X9 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X10 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X11 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.6496 ps=5.06 w=2.24 l=4
+X12 w_7732_n1987# m1_1233_n1772# vdd vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.8004 pd=5.81 as=0.8004 ps=5.81 w=5.52 l=4
+X13 vdd m1_1233_n1772# w_7732_n1987# vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.8004 pd=5.81 as=0.8004 ps=5.81 w=5.52 l=4
+X14 vdd m1_1233_n1772# m1_1233_n1772# vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.8004 pd=5.81 as=1.6008 ps=11.62 w=5.52 l=4
+X15 m1_1233_n1772# m1_1233_n1772# vdd vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.8004 pd=5.81 as=0.8004 ps=5.81 w=5.52 l=4
+X16 vdd m1_1233_n1772# m1_1233_n1772# vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.8004 pd=5.81 as=0.8004 ps=5.81 w=5.52 l=4
+X17 w_7732_n1987# m1_1233_n1772# vdd vdd sky130_fd_pr__pfet_g5v0d10v5 ad=1.6008 pd=11.62 as=0.8004 ps=5.81 w=5.52 l=4
+X18 m1_40_n5805# m1_156_n2110# pad vdd sky130_fd_pr__pfet_g5v0d10v5 ad=2.32 pd=16.58 as=2.32 ps=16.58 w=8 l=0.5
+X19 w_7732_n1987# vb m1_12778_n4065# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.8787 pd=6.64 as=0.8787 ps=6.64 w=3.03 l=2
+X20 m1_1233_n1772# m1_40_n5805# m1_12778_n4065# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.8787 pd=6.64 as=3.7062 ps=28.46 w=3.03 l=2
+X21 vbn en m1_463_n5886# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.2436 pd=2.26 as=0.2436 ps=2.26 w=0.84 l=0.5
+X22 m1_463_n5886# m1_156_n2110# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.4872 pd=4.52 as=12.18 ps=95.6 w=0.84 l=0.5
+X23 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X24 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X25 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X26 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X27 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X28 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.6496 ps=5.06 w=2.24 l=4
+X29 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X30 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X31 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X32 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.6496 pd=5.06 as=0.3248 ps=2.53 w=2.24 l=4
+X33 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X34 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X35 m1_156_n2110# en vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.2436 pd=2.26 as=0 ps=0 w=0.84 l=0.5
+X36 m1_40_n5805# w_7732_n1987# vdd vdd sky130_fd_pr__pfet_g5v0d10v5 ad=1.044 pd=7.78 as=1.044 ps=7.78 w=3.6 l=0.5
+X37 w_7732_n1987# en vdd vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.2436 pd=2.26 as=0.1218 ps=1.13 w=0.84 l=0.5
+X38 vdd en m1_156_n2110# vdd sky130_fd_pr__pfet_g5v0d10v5 ad=0.1218 pd=1.13 as=0.2436 ps=2.26 w=0.84 l=0.5
+X39 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X40 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.6496 ps=5.06 w=2.24 l=4
+X41 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X42 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X43 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X44 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.6496 pd=5.06 as=0.3248 ps=2.53 w=2.24 l=4
+X45 m1_40_n5805# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X46 vss m1_463_n5886# m1_40_n5805# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X47 w_7732_n1987# m1_40_n5805# w_7732_n1987# w_7732_n1987# sky130_fd_pr__pfet_g5v0d10v5 ad=1.9343 pd=13.92 as=1.9343 ps=13.92 w=6.67 l=20
+X48 w_7732_n1987# m1_40_n5805# w_7732_n1987# w_7732_n1987# sky130_fd_pr__pfet_g5v0d10v5 ad=15.051 pd=109.02 as=0 ps=0 w=6.67 l=20
+X49 m1_40_n5805# en pad vss sky130_fd_pr__nfet_g5v0d10v5 ad=1.16 pd=8.58 as=1.16 ps=8.58 w=4 l=0.5
+X50 w_7732_n1987# m1_40_n5805# w_7732_n1987# w_7732_n1987# sky130_fd_pr__pfet_g5v0d10v5 ad=0 pd=0 as=0 ps=0 w=6.67 l=20
+X51 vss m1_463_n5886# m1_12778_n4065# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+X52 m1_12778_n4065# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.6496 pd=5.06 as=0.3248 ps=2.53 w=2.24 l=4
+X53 vss m1_463_n5886# m1_12778_n4065# vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.6496 ps=5.06 w=2.24 l=4
+X54 m1_12778_n4065# m1_463_n5886# vss vss sky130_fd_pr__nfet_g5v0d10v5 ad=0.3248 pd=2.53 as=0.3248 ps=2.53 w=2.24 l=4
+C0 vss en 0.094595f
+C1 vbn m1_1233_n1772# 0.324305f
+C2 m1_12778_n4065# vss 0.207126f
+C3 vdd m1_40_n5805# 3.175008f
+C4 vdd w_7732_n1987# 1.606185f
+C5 m1_463_n5886# en 10.311258f
+C6 m1_12778_n4065# m1_463_n5886# 1.206531f
+C7 vdd m1_156_n2110# 0.444691f
+C8 vss vbn 0.002352f
+C9 vb m1_40_n5805# 0.673277f
+C10 pad en 0.69163f
+C11 m1_12778_n4065# pad 0.653025f
+C12 vb w_7732_n1987# 0.704068f
+C13 m1_1233_n1772# m1_40_n5805# 1.32047f
+C14 m1_463_n5886# vbn 0.15488f
+C15 m1_1233_n1772# w_7732_n1987# 2.27452f
+C16 vbn pad 1.0902f
+C17 m1_1233_n1772# m1_156_n2110# 0.088261f
+C18 vss m1_40_n5805# 1.58603f
+C19 m1_463_n5886# m1_40_n5805# 20.646341f
+C20 vss m1_156_n2110# 0.136793f
+C21 m1_463_n5886# w_7732_n1987# 5.17651f
+C22 pad m1_40_n5805# 6.724486f
+C23 m1_463_n5886# m1_156_n2110# 0.426064f
+C24 pad w_7732_n1987# 0.97934f
+C25 m1_12778_n4065# en 1.874476f
+C26 pad m1_156_n2110# 1.026376f
+C27 vbn en 1.874299f
+C28 m1_1233_n1772# vdd 8.231179f
+C29 vb m1_1233_n1772# 9.69e-19
+C30 m1_40_n5805# en 1.091132f
+C31 m1_12778_n4065# m1_40_n5805# 1.766885f
+C32 vss vdd 0.003035f
+C33 w_7732_n1987# en 0.708335f
+C34 m1_12778_n4065# w_7732_n1987# 0.992736f
+C35 m1_463_n5886# vdd 0.051684f
+C36 m1_156_n2110# en 1.542574f
+C37 vb vss 0.151979f
+C38 vbn m1_40_n5805# 0.168806f
+C39 vbn w_7732_n1987# 0.061007f
+C40 pad vdd 0.52032f
+C41 vss m1_1233_n1772# 0.016259f
+C42 m1_463_n5886# vb 0.010005f
+C43 vbn m1_156_n2110# 0.058031f
+C44 m1_463_n5886# m1_1233_n1772# 7.301926f
+C45 vb pad 3.726158f
+C46 m1_1233_n1772# pad 0.727467f
+C47 w_7732_n1987# m1_40_n5805# 19.032331f
+C48 m1_463_n5886# vss 12.109076f
+C49 m1_40_n5805# m1_156_n2110# 1.200313f
+C50 w_7732_n1987# m1_156_n2110# 0.307547f
+C51 vss pad 0.017543f
+C52 m1_463_n5886# pad 0.103943f
+C53 vdd en 1.147229f
+C54 m1_12778_n4065# vb 2.404887f
+C55 vbn vdd 0.124192f
+C56 m1_1233_n1772# en 0.354816f
+C57 m1_12778_n4065# m1_1233_n1772# 0.455169f
+C58 m1_12778_n4065# 0 4.450824f $ **FLOATING
+C59 pad 0 2.570858f
+C60 en 0 6.15155f
+C61 m1_156_n2110# 0 1.138215f $ **FLOATING
+C62 vbn 0 0.296453f
+C63 m1_1233_n1772# 0 9.889115f $ **FLOATING
+C64 w_7732_n1987# 0 74.81375f $ **FLOATING
+C65 vb 0 1.361899f
+C66 vdd 0 45.72736f
+C67 m1_40_n5805# 0 34.770256f $ **FLOATING
+C68 m1_463_n5886# 0 66.103966f $ **FLOATING
+.ends

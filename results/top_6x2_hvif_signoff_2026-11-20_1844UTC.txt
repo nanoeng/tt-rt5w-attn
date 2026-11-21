@@ -1,0 +1,55 @@
+RT5W on TTSKY26e (sky130A, tt_analog_6x2_3v3): 3.3 V-side decode, 30 shifters, full-chip route + sign-off
+Task: "decode one-hot cell select and static codes on the 3.3 V side, cut the 74 shifters to ~25, pack the analog
+blocks more densely where possible" -- then floorplan, top route, GDS merge, top DRC/LVS, TT precheck.
+Date: 2026-11-20 18:44 UTC. Tools: OpenROAD (pixi env openroad), yosys 0.71, magic 8.3 + netgen (open_pdks d56f8a8),
+KLayout 0.30.13 Python API (layout), system KLayout 0.28.16 (Ruby) for the precheck's KLayout decks,
+tt-support-tools precheck (local clone).
+
+1. Interface change (RTL)
+   - 1.8 V -> 3.3 V crossings 74 -> 30: bias_en, vb_probe_en, pump_up1-3, pump_dn1-3, adc_ch0-3, adc_rst, adc_lat,
+     dac0-7, cfg_sdat, cfg_sclk, wsel_a0-4, wsel_e.
+   - q/k codes (32 static bits): serial chain in rt5w_hvif (32 x hvl dfxtp_1), shifted by rt5w_ctrl in S_IDLE only,
+     3 clk/bit, start held pending while the chain shifts.
+   - wsel[19:0] one-hot: 5-bit address + enable, decoded in rt5w_hvif (inv/and3/and2), break-before-make in rt5w_ctrl.
+   - cocotb: RTL 10/10 PASS, gate-level (hardened digital netlist) 10/10 PASS (test/test_rt5w.py, incl.
+     t10_hvif_break_before_make_and_chain). hvif gate netlist vs RTL: 0 mismatches / 3000 vectors (earlier today).
+
+2. Blocks
+   rt5w_hvif     196.0 x 32.42 um, 6 unithv rows, 67 hvl cells; OpenROAD route 0 violations; magic DRC 0; LVS clean.
+                 Outputs on the bottom edge in destination order, k codes on the right edge (met3).
+   rt5w_lsbank   30 x lsbuflv2hv_1, 168.1 x 20.3 um (was 74 cells, 400.4 x 20.3); DRC 0; LVS clean.
+   rt5w_digital  330 x 82 um, 1281 cells, density 0.72 routability-driven; detailed route 0 violations (19 iter.);
+                 worst setup slack 37.85 ns, hold 0.34 ns, tns 0; magic DRC 0; LVS vs pwr.v clean
+                 (pwr.v post-processed: VPWR/VGND ports, supplies on 49 CTS buffers -> design/digital/pwrv_fix.py).
+   Analog blocks unchanged (array 541.9 x 129.3, bias, readout, softmax, k-scale x4, vbbuf, lsdn): bias/readout/softmax
+   GDS had lost their pin-to-edge extensions (rewritten 16:45 by a stats run) -> re-extended, DRC 0 / LVS clean, LEFs
+   identical. softmax rser_L244_h5: 28 boxes snapped to the 5 nm grid; DRC 0 / LVS clean.
+   No analog re-pack was needed: macros 188.9k um2 = 82.5 % of the tile (229.1k), and the full chip routes.
+
+3. Floorplan (design/layout/topflow.py FP, tile um)
+   array (1.84, 6.0) .. top 135.3 | digital (2, 141.76) 330 x 82 under the TT pins | hvif (336.26, 147) |
+   bank (342, 192) | bias (554, 3) | k-scales (554/627/703/776, 178) | readout (703, 3) | vbbuf (703, 133) |
+   softmax (905, 4) | lsdn (875, 140) | met4 stripes VAPWR 545.5, VGND 548.5, VDPWR 551.5 (2 um, y 5..220.76).
+
+4. Top route (OpenROAD, met1-met4, macros FIRM, supplies as NDR nets): global route 51.0 mm, detailed route
+   0 violations. Fixes on the way: hvif supply pins need the met3 landing pad in the pin (as the bank) and a 3 um LEF
+   band; k codes moved to the hvif right edge (one residual short through hvif with bottom-edge k pins).
+
+5. GDS merge (design/layout/merge.py): macro origins from the LEF ORIGIN (KLayout ignores it with macro_layouts);
+   43 TT digital pins: template met4 pin + label + via stack met4->met2 into the digital top pins (0.4 um clear of
+   the digital's top-edge met3); ua[0..2]: template met4 pin + label, met3 pseudo-pins removed; marker clean-up
+   (nwell touching hvi covered by hvi, closing of hvi/hvntm 0.7 um and psdm 0.38 um gaps, never over nsdm);
+   prBoundary 235/4.
+
+6. Sign-off on layout/gds/tt_um_rt5w_attn.gds
+   magic DRC (drc(full), TT settings): 0
+   full-chip LVS (netgen; blocks + hvl CDL + hd SPICE + digital pwr.v + structural top): Circuits match uniquely.
+   TT precheck (tt-support-tools, top LEF from magic -pinonly, blackbox .v): all 16 checks pass --
+     Magic DRC, KLayout FEOL, BEOL, offgrid, pin label, zero area, KLayout Checks, Pin, Boundary, Power pin, Layer,
+     Cell name, urpm/nwell, hvtp/nwell, Analog pin, Verilog syntax.
+   Before the marker clean-up the KLayout FEOL deck reported 198 violations (hvntm.2 146, MR_nwell.CON.1 28,
+   MR_psdm.SP.1 12, hvi.2a 8, hvi.1 4) and offgrid 120 (rser_L244_h5 112, lsbank 8) -- none seen by magic.
+   Caveat: the KLayout decks ran on KLayout 0.28.16 (the only Ruby-enabled KLayout here); the TT CI uses a newer one.
+   Caveat: yowasp-yosys replaced by native yosys 0.71 (same front end) for the syntax check.
+
+7. Not done yet: PEX re-simulation of the chain on the final layout; submission repo update (gds/, lef/, src/).

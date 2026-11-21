@@ -1,0 +1,103 @@
+{
+ "block": "rt5w_lsup",
+ "gds": "layout/gds/rt5w_lsup.gds",
+ "width": 24.14,
+ "height": 15.27,
+ "origin": [
+  -2.6,
+  -15.27
+ ],
+ "pairs": 1,
+ "spine": 0,
+ "devices": 10,
+ "device_area_um2": 31,
+ "shorts": 0,
+ "pair_info": [
+  {
+   "chan_tracks": 4,
+   "band": 0,
+   "top_h": 2.68,
+   "bot_h": 3.145,
+   "top_w": 11.54,
+   "bot_w": 5.8
+  }
+ ],
+ "ports": [
+  "in",
+  "out",
+  "vddl",
+  "vdd",
+  "vss"
+ ],
+ "pins": [
+  {
+   "net": "vddl",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -6.845,
+   "side": "L"
+  },
+  {
+   "net": "in",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -7.525,
+   "side": "L"
+  },
+  {
+   "net": "out",
+   "layer": "met3",
+   "x": 21.54,
+   "y": -7.525,
+   "side": "R"
+  },
+  {
+   "net": "vdd",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -0.45,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vdd",
+   "layer": "met3",
+   "x": 21.54,
+   "y": -0.45,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": -2.6,
+   "y": -14.82,
+   "side": "L",
+   "width": 0.9
+  },
+  {
+   "net": "vss",
+   "layer": "met3",
+   "x": 21.54,
+   "y": -14.82,
+   "side": "R",
+   "width": 0.9
+  },
+  {
+   "net": "vdd",
+   "layer": "met4",
+   "x": -1.6,
+   "y": -7.635,
+   "side": "L",
+   "width": 1.6
+  },
+  {
+   "net": "vss",
+   "layer": "met4",
+   "x": 20.54,
+   "y": -7.635,
+   "side": "R",
+   "width": 1.6
+  }
+ ]
+}

@@ -1,0 +1,92 @@
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+MACRO rt5w_vbbuf
+  CLASS BLOCK ;
+  FOREIGN rt5w_vbbuf ;
+  ORIGIN 3.050 40.385 ;
+  SIZE 118.300 BY 41.185 ;
+  SYMMETRY X Y ;
+  PIN en
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -12.395 -0.550 -12.095 ;
+    END
+  END en
+  PIN pad
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -13.755 -0.550 -13.455 ;
+    END
+  END pad
+  PIN vb
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 112.750 -13.075 115.250 -12.775 ;
+    END
+  END vb
+  PIN vbn
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -3.050 -13.075 -0.550 -12.775 ;
+    END
+  END vbn
+  PIN vdd
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT -2.400 -40.385 -0.800 0.800 ;
+    END
+  END vdd
+  PIN vss
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met4 ;
+        RECT 113.000 -40.385 114.600 0.800 ;
+    END
+  END vss
+  OBS
+    LAYER li1 ;
+      RECT -0.550 -37.885 112.750 -1.700 ;
+      RECT -0.655 -24.635 -0.550 -24.305 ;
+      RECT -0.655 -0.615 35.715 -0.285 ;
+    LAYER met1 ;
+      RECT -0.550 -37.885 112.750 -1.700 ;
+      RECT -0.700 -24.635 -0.550 -24.305 ;
+      RECT -0.700 -0.615 35.760 -0.285 ;
+    LAYER met2 ;
+      RECT -0.640 -0.635 -0.360 -0.265 ;
+      RECT 3.675 -0.635 3.955 -0.265 ;
+      RECT 3.715 -1.700 3.915 -0.635 ;
+      RECT 10.445 -0.635 10.725 -0.265 ;
+      RECT 10.485 -1.700 10.685 -0.635 ;
+      RECT 19.025 -0.635 19.305 -0.265 ;
+      RECT 19.065 -1.700 19.265 -0.635 ;
+      RECT 27.605 -0.635 27.885 -0.265 ;
+      RECT 27.645 -1.700 27.845 -0.635 ;
+      RECT 33.585 -0.635 33.865 -0.265 ;
+      RECT 33.625 -1.700 33.825 -0.635 ;
+      RECT -0.550 -37.885 112.750 -1.700 ;
+      RECT -0.640 -24.655 -0.550 -24.285 ;
+      RECT 35.420 -0.635 35.700 -0.265 ;
+    LAYER met3 ;
+      RECT -3.050 -39.585 115.250 -38.685 ;
+      RECT -0.550 -24.020 112.750 -1.700 ;
+      RECT -3.050 -24.920 115.250 -24.020 ;
+      RECT -0.550 -37.885 112.750 -24.920 ;
+      RECT -3.050 -0.900 115.250 0.000 ;
+    LAYER met4 ;
+      RECT -0.550 -37.885 112.750 -1.700 ;
+  END
+END rt5w_vbbuf
+END LIBRARY

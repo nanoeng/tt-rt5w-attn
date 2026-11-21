@@ -1,0 +1,114 @@
+== tech (measured per corner)
+tt    27 C: I_u  123.7 nA  vr 1.561  vcas 1.155  vbn 0.818  vmid 2.311  nU_T,n 53.9 mV  nU_T,p 56.0 mV  dcol 2.274 V  cell gain 1.077  R 7.37 kOhm/um
+ss   -40 C: I_u   96.2 nA  vr 1.746  vcas 1.197  vbn 0.919  vmid 2.311  nU_T,n 42.0 mV  nU_T,p 45.4 mV  dcol 2.131 V  cell gain 1.082  R 7.37 kOhm/um
+ff   125 C: I_u  162.5 nA  vr 1.313  vcas 1.117  vbn 0.684  vmid 2.311  nU_T,n 71.2 mV  nU_T,p 72.4 mV  dcol 2.462 V  cell gain 1.076  R 7.37 kOhm/um
+tt_27 52.82 mV in-cell key slope
+ss_-40 43.19 mV in-cell key slope
+ff_125 68.89 mV in-cell key slope
+== bias
+tt          27 C: I_u  123.7 nA | ndac/I_u 1.000  nd/I_u 0.0690 (1/15 = 0.0667)  kbias/I_u 0.0416 (0.04) | gated: nbias 2.18 %  nd0 2.13 % | vr 1.561 vmid 2.311 vcas 1.155 vbn 0.818 | I_DD 4.91 uA (gated 3.25)
+ss         -40 C: I_u   96.2 nA | ndac/I_u 1.000  nd/I_u 0.0692 (1/15 = 0.0667)  kbias/I_u 0.0417 (0.04) | gated: nbias 2.99 %  nd0 2.92 % | vr 1.746 vmid 2.311 vcas 1.197 vbn 0.919 | I_DD 4.30 uA (gated 3.02)
+ff         125 C: I_u  162.5 nA | ndac/I_u 1.000  nd/I_u 0.0689 (1/15 = 0.0667)  kbias/I_u 0.0415 (0.04) | gated: nbias 1.61 %  nd0 1.58 % | vr 1.313 vmid 2.311 vcas 1.117 vbn 0.684 | I_DD 5.78 uA (gated 3.58)
+start-up (supply ramp 0->3.3 V in 10 us): I_u settles to 2 % at 10.1 us, final 123.7 nA
+== idac
+tt          27 C: I(15)  126.82 nA  gain vs model +2.56 %  INL 0.005 LSB  DNL 0.000 LSB  monotonic True
+ss         -40 C: I(15)   98.32 nA  gain vs model +2.36 %  INL 0.000 LSB  DNL 0.000 LSB  monotonic True
+ff         125 C: I(15)  169.25 nA  gain vs model +3.18 %  INL 0.980 LSB  DNL 0.065 LSB  monotonic True
+== keycell
+tt          27 C: I_cell/I_Q at V_w=0 for q=(1, 3, 7, 15): [1.1028 1.0843 1.0677 1.052 ]  (spread 4.83 %)
+          fitted nU_T,p per q (mV): [51.89 52.5  53.08 53.8 ]  (model 56.015883269025366 at 27 C);  max |error| vs exp(-V_w/52.8 mV) 10.4 % (cells > 200 pA)
+ss         -40 C: I_cell/I_Q at V_w=0 for q=(1, 3, 7, 15): [1.1081 1.0901 1.0732 1.057 ]  (spread 4.84 %)
+          fitted nU_T,p per q (mV): [42.61 42.94 43.34 43.88]  (model 56.015883269025366 at 27 C);  max |error| vs exp(-V_w/43.2 mV) 20.8 % (cells > 200 pA)
+ff         125 C: I_cell/I_Q at V_w=0 for q=(1, 3, 7, 15): [1.1041 1.0832 1.0655 1.0495]  (spread 5.20 %)
+          fitted nU_T,p per q (mV): [67.72 68.55 69.21 70.08]  (model 56.015883269025366 at 27 C);  max |error| vs exp(-V_w/68.9 mV) 5.8 % (cells > 200 pA)
+== softmax
+tt          27 C: max share error 5.07 LSB raw, 1.28 LSB at x scale 1.072;  sum I_out / (4 I_sum) 0.997..1.000;  V_B = 0.612 + 42.34 mV x LSE (fit residual 4.7 mV)
+ss         -40 C: max share error 4.99 LSB raw, 0.96 LSB at x scale 1.080;  sum I_out / (4 I_sum) 0.982..0.984;  V_B = 0.666 + 33.11 mV x LSE (fit residual 3.3 mV)
+ff         125 C: max share error 5.27 LSB raw, 2.06 LSB at x scale 1.062;  sum I_out / (4 I_sum) 1.013..1.018;  V_B = 0.539 + 55.78 mV x LSE (fit residual 7.2 mV)
+== vbbuf
+tt          27 C: ua[1] - V_B at (1.1, 1.5, 1.9, 2.35) V = [-1.01 -1.82 -2.95 -3.8 ] mV (after VBCAL slope/offset 0.13 mV) | settle (2 mV) 7.7 us | disabled leakage 0.0 pA
+ss         -40 C: ua[1] - V_B at (1.1, 1.5, 1.9, 2.35) V = [-0.89 -1.82 -3.63 -3.47] mV (after VBCAL slope/offset 0.75 mV) | settle (2 mV) 9.3 us | disabled leakage 0.0 pA
+ff         125 C: ua[1] - V_B at (1.1, 1.5, 1.9, 2.35) V = [-1.22 -1.91 -2.83 -4.22] mV (after VBCAL slope/offset 0.16 mV) | settle (2 mV) 5.8 us | disabled leakage 346.2 pA
+== readout (SAR in ngspice)
+tt          27 C: model codes [0, 1, 2, 7, 31, 64, 100, 127, 128, 180, 254, 255]
+                 SPICE codes [0, 1, 2, 7, 31, 63, 99, 125, 126, 178, 250, 251]  | max |err| vs model 4 LSB, vs ideal 256-step DAC 4 LSB
+ss         -40 C: model codes [0, 1, 2, 7, 31, 64, 100, 127, 128, 180, 254, 255]
+                 SPICE codes [0, 1, 1, 6, 31, 64, 99, 126, 126, 178, 250, 252]  | max |err| vs model 4 LSB, vs ideal 256-step DAC 4 LSB
+ff         125 C: model codes [0, 1, 2, 7, 31, 64, 100, 127, 128, 180, 254, 255]
+                 SPICE codes [0, 1, 2, 8, 33, 68, 107, 135, 137, 192, 255, 255]  | max |err| vs model 12 LSB, vs ideal 256-step DAC 12 LSB
+== full chain, transistor level, SAR in ngspice
+tt 27 [15, 15, 15, 15] [15, 15, 15, 15] model [255, 0, 0, 0] SPICE [247, 0, 0, 0] err 8
+tt 27 [15, 8, 4, 0] [15, 15, 15, 15] model [130, 24, 9, 91] SPICE [123, 22, 8, 95] err 7
+tt 27 [7, 7, 7, 7] [15, 15, 15, 15] model [64, 64, 64, 64] SPICE [62, 62, 62, 62] err 2
+tt 27 [15, 8, 4, 0] [9, 15, 12, 6] model [81, 122, 28, 25] SPICE [74, 127, 25, 20] err 7
+ss -40 [15, 15, 15, 15] [15, 15, 15, 15] model [255, 0, 0, 0] SPICE [247, 0, 0, 0] err 8
+ss -40 [15, 8, 4, 0] [15, 15, 15, 15] model [130, 24, 9, 91] SPICE [122, 22, 8, 93] err 8
+ss -40 [7, 7, 7, 7] [15, 15, 15, 15] model [64, 64, 64, 64] SPICE [62, 62, 62, 62] err 2
+ss -40 [15, 8, 4, 0] [9, 15, 12, 6] model [81, 122, 28, 25] SPICE [76, 124, 25, 22] err 5
+ff 125 [15, 15, 15, 15] [15, 15, 15, 15] model [255, 0, 0, 0] SPICE [255, 0, 0, 0] err 0
+ff 125 [15, 8, 4, 0] [15, 15, 15, 15] model [130, 24, 9, 91] SPICE [127, 23, 9, 110] err 19
+ff 125 [7, 7, 7, 7] [15, 15, 15, 15] model [64, 64, 64, 64] SPICE [67, 67, 67, 67] err 3
+ff 125 [15, 8, 4, 0] [9, 15, 12, 6] model [81, 122, 28, 25] SPICE [72, 150, 27, 20] err 28
+== gm/ID sizing log
+n mirror unit @ I_u          n  I_D   125.00 nA  ('sigma_i', 0.05)        gm/ID  17.2  W   2.24  L  4.00  V_GS 0.848
+p distribution unit @ I_u    p  I_D   125.00 nA  ('sigma_i', 0.05)        gm/ID  17.8  W   8.27  L  4.00  V_GS 1.027
+IDAC unit @ I_u/15           n  I_D     8.33 nA  ('sigma_i', 0.03)        gm/ID  17.4  W   6.37  L  4.00  V_GS 0.848
+DAC unit @ I_u/16            n  I_D     7.81 nA  ('sigma_i', 0.05)        gm/ID  17.6  W   4.68  L  2.00  V_GS 0.847
+k-scale unit @ 4I_u/15       n  I_D    33.33 nA  ('sigma_i', 0.05)        gm/ID  18.1  W   4.94  L  2.00  V_GS 0.847
+array PMOS / column diode @ I_u p  I_D   125.00 nA  ('sigma_i', 0.05)        gm/ID  17.8  W   8.27  L  4.00  V_GS 1.027
+DDA pair device @ I_u/2 (L 4: gain + CMRR) n  I_D    62.50 nA  ('vos', 0.01)            gm/ID  15.6  W   0.62  L  4.00  V_GS 0.848
+DDA PMOS load @ I_u/2 (L 4)  p  I_D    62.50 nA  ('vos', 0.01)            gm/ID  17.8  W   4.14  L  4.00  V_GS 1.027
+softmax PMOS unit @ I_u      p  I_D   125.00 nA  ('sigma_i', 0.03)        gm/ID  18.7  W  15.11  L  4.00  V_GS 1.027
+exponentiator Me @ I_u       n  I_D   125.00 nA  ('vt', 0.0023)           gm/ID  18.6  W   7.15  L  2.00  V_GS 0.847
+StrongARM input @ 2 uA       n  I_D  2000.00 nA  ('vos', 0.006)           gm/ID  16.0  W   4.21  L  1.00  V_GS 0.86
+V_B buffer pair @ 2I_u       n  I_D   250.00 nA  ('vos', 0.005)           gm/ID  17.9  W   3.03  L  2.00  V_GS 0.847
+V_B buffer load @ 2I_u       p  I_D   250.00 nA  ('sigma_i', 0.03)        gm/ID  17.8  W  16.54  L  4.00  V_GS 1.027
+NMOS cascode @ 4I_u          n  I_D   500.00 nA  ('gmid', 14)             gm/ID  14.0  W   0.62  L  1.00  V_GS 0.894
+PMOS cascode @ 4I_u          p  I_D   500.00 nA  ('gmid', 14)             gm/ID  14.0  W   1.49  L  1.00  V_GS 1.109
+headroom diode @ I_u (strong inv.) n  I_D   125.00 nA  ('gmid', 6)              gm/ID   8.4  W   0.42  L  8.00  V_GS 1.099
+headroom diode p @ I_u (strong inv.) p  I_D   125.00 nA  ('gmid', 6)              gm/ID   6.0  W   0.55  L  8.00  V_GS 1.337
+switch / logic n             n  I_D     0.00 nA  ('min',)                 gm/ID   -    W   0.84  L  0.50  V_GS -
+switch / logic p             p  I_D     0.00 nA  ('min',)                 gm/ID   -    W   0.84  L  0.50  V_GS -
+vr follower @ 1.5 uA (sinks the four R_c currents) p  I_D  1500.00 nA  ('gmid', 18)             gm/ID  18.0  W  16.65  L  1.00  V_GS 1.027
+vcp stack diodes @ I_u       p  I_D   125.00 nA  ('gmid', 16)             gm/ID  16.0  W   2.17  L  2.00  V_GS 1.049
+vcas diode @ I_u (strong inv., V_GS ~1.2 V) n  I_D   125.00 nA  ('gmid', 4)              gm/ID   8.4  W   0.42  L 20.00  V_GS 1.265
+core NMOS cascode @ I_ref (weak inv.: low V_GS) n  I_D   500.00 nA  ('gmid', 17)             gm/ID  17.0  W   1.47  L  1.00  V_GS 0.838
+trim pump PMOS @ I_u/34      p  I_D     3.68 nA  ('sigma_i', 0.1)         gm/ID  19.4  W   1.47  L  4.00  V_GS 1.027
+trim pump NMOS @ I_u/34      n  I_D     3.68 nA  ('sigma_i', 0.1)         gm/ID  17.7  W   2.37  L  1.00  V_GS 0.86
+mux cascode @ 16 I_u         p  I_D  2000.00 nA  ('gmid', 15)             gm/ID  15.0  W   4.20  L  0.50  V_GS 0.997
+pcas diodes @ I_u            p  I_D   125.00 nA  ('gmid', 10)             gm/ID  16.3  W   0.42  L  0.50  V_GS 1.105
+DAC unit cascode @ I_u/16    n  I_D     7.81 nA  ('gmid', 15)             gm/ID  18.2  W   0.42  L  0.50  V_GS 0.857
+StrongARM cross / tail @ 2 uA n  I_D  2000.00 nA  ('gmid', 12)             gm/ID  12.0  W   0.57  L  0.50  V_GS 0.916
+softmax keep-alive @ I_u/25  n  I_D     5.00 nA  ('sigma_i', 0.1)         gm/ID  17.7  W   2.38  L  1.00  V_GS 0.86
+V_B buffer output PMOS @ 32 I_u p  I_D  4000.00 nA  ('gmid', 12)             gm/ID  12.0  W   3.60  L  0.50  V_GS 1.06
+n mirror unit @ I_u          n  I_D   125.00 nA  ('sigma_i', 0.05)        gm/ID  17.2  W   2.24  L  4.00  V_GS 0.848
+p distribution unit @ I_u    p  I_D   125.00 nA  ('sigma_i', 0.05)        gm/ID  17.8  W   8.27  L  4.00  V_GS 1.027
+IDAC unit @ I_u/15           n  I_D     8.33 nA  ('sigma_i', 0.03)        gm/ID  17.4  W   6.37  L  4.00  V_GS 0.848
+DAC unit @ I_u/16            n  I_D     7.81 nA  ('sigma_i', 0.05)        gm/ID  17.6  W   4.68  L  2.00  V_GS 0.847
+k-scale unit @ 4I_u/15       n  I_D    33.33 nA  ('sigma_i', 0.05)        gm/ID  18.1  W   4.94  L  2.00  V_GS 0.847
+array PMOS / column diode @ I_u p  I_D   125.00 nA  ('sigma_i', 0.05)        gm/ID  17.8  W   8.27  L  4.00  V_GS 1.027
+DDA pair device @ I_u/2 (L 4: gain + CMRR) n  I_D    62.50 nA  ('vos', 0.01)            gm/ID  15.6  W   0.62  L  4.00  V_GS 0.848
+DDA PMOS load @ I_u/2 (L 4)  p  I_D    62.50 nA  ('vos', 0.01)            gm/ID  17.8  W   4.14  L  4.00  V_GS 1.027
+softmax PMOS unit @ I_u      p  I_D   125.00 nA  ('sigma_i', 0.03)        gm/ID  18.7  W  15.11  L  4.00  V_GS 1.027
+exponentiator Me @ I_u       n  I_D   125.00 nA  ('vt', 0.0023)           gm/ID  18.6  W   7.15  L  2.00  V_GS 0.847
+StrongARM input @ 2 uA       n  I_D  2000.00 nA  ('vos', 0.006)           gm/ID  16.0  W   4.21  L  1.00  V_GS 0.86
+V_B buffer pair @ 2I_u       n  I_D   250.00 nA  ('vos', 0.005)           gm/ID  17.9  W   3.03  L  2.00  V_GS 0.847
+V_B buffer load @ 2I_u       p  I_D   250.00 nA  ('sigma_i', 0.03)        gm/ID  17.8  W  16.54  L  4.00  V_GS 1.027
+NMOS cascode @ 4I_u          n  I_D   500.00 nA  ('gmid', 14)             gm/ID  14.0  W   0.62  L  1.00  V_GS 0.894
+PMOS cascode @ 4I_u          p  I_D   500.00 nA  ('gmid', 14)             gm/ID  14.0  W   1.49  L  1.00  V_GS 1.109
+headroom diode @ I_u (strong inv.) n  I_D   125.00 nA  ('gmid', 6)              gm/ID   8.4  W   0.42  L  8.00  V_GS 1.099
+headroom diode p @ I_u (strong inv.) p  I_D   125.00 nA  ('gmid', 6)              gm/ID   6.0  W   0.55  L  8.00  V_GS 1.337
+switch / logic n             n  I_D     0.00 nA  ('min',)                 gm/ID   -    W   0.84  L  0.50  V_GS -
+switch / logic p             p  I_D     0.00 nA  ('min',)                 gm/ID   -    W   0.84  L  0.50  V_GS -
+vr follower @ 1.5 uA (sinks the four R_c currents) p  I_D  1500.00 nA  ('gmid', 18)             gm/ID  18.0  W  16.65  L  1.00  V_GS 1.027
+vcp stack diodes @ I_u       p  I_D   125.00 nA  ('gmid', 16)             gm/ID  16.0  W   2.17  L  2.00  V_GS 1.049
+vcas diode @ I_u (strong inv., V_GS ~1.2 V) n  I_D   125.00 nA  ('gmid', 4)              gm/ID   8.4  W   0.42  L 20.00  V_GS 1.265
+core NMOS cascode @ I_ref (weak inv.: low V_GS) n  I_D   500.00 nA  ('gmid', 17)             gm/ID  17.0  W   1.47  L  1.00  V_GS 0.838
+trim pump PMOS @ I_u/34      p  I_D     3.68 nA  ('sigma_i', 0.1)         gm/ID  19.4  W   1.47  L  4.00  V_GS 1.027
+trim pump NMOS @ I_u/34      n  I_D     3.68 nA  ('sigma_i', 0.1)         gm/ID  17.7  W   2.37  L  1.00  V_GS 0.86
+mux cascode @ 16 I_u         p  I_D  2000.00 nA  ('gmid', 15)             gm/ID  15.0  W   4.20  L  0.50  V_GS 0.997
+pcas diodes @ I_u            p  I_D   125.00 nA  ('gmid', 10)             gm/ID  16.3  W   0.42  L  0.50  V_GS 1.105
+DAC unit cascode @ I_u/16    n  I_D     7.81 nA  ('gmid', 15)             gm/ID  18.2  W   0.42  L  0.50  V_GS 0.857
+StrongARM cross / tail @ 2 uA n  I_D  2000.00 nA  ('gmid', 12)             gm/ID  12.0  W   0.57  L  0.50  V_GS 0.916
+softmax keep-alive @ I_u/25  n  I_D     5.00 nA  ('sigma_i', 0.1)         gm/ID  17.7  W   2.38  L  1.00  V_GS 0.86
+V_B buffer output PMOS @ 32 I_u p  I_D  4000.00 nA  ('gmid', 12)             gm/ID  12.0  W   3.60  L  0.50  V_GS 1.06

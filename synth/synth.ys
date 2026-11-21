@@ -1,0 +1,7 @@
+read_verilog ../src/rt5w_ctrl.v
+synth -top rt5w_ctrl -flatten
+dfflibmap -liberty /home/claude/ext/gf180_sc7_tt_025C_3v30.lib
+abc -liberty /home/claude/ext/gf180_sc7_tt_025C_3v30.lib -D 20000
+opt_clean
+stat -liberty /home/claude/ext/gf180_sc7_tt_025C_3v30.lib
+write_verilog -noattr gate_level_ctrl.v

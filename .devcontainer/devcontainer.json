@@ -1,0 +1,28 @@
+{
+  // VS Code Dev Containers / GitHub Codespaces: the RT5W toolchain image with your checkout mounted.
+  "name": "RT5W TinyTapeout toolchain",
+  "build": {
+    "dockerfile": "../container/Dockerfile",
+    "context": "..",
+    "args": { "BASE": "ubuntu:24.04" }
+  },
+  // or, once CI has published it:  "image": "ghcr.io/<owner>/rt5w-tt:latest",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "overrideCommand": false,
+  "runArgs": ["--init"],
+  "containerEnv": { "RT5W_PDK": "/opt/rt5w/.pdk", "GF180_MODELS": "/opt/rt5w/.pdk/gf180mcu_fd_pr/models/ngspice" },
+  "postCreateCommand": "bash -lc 'source /opt/rt5w/env.sh && make emu'",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "rt5w",
+        "terminal.integrated.profiles.linux": { "rt5w": { "path": "bash", "args": ["--rcfile", "/opt/rt5w/env.sh"] } },
+        "python.defaultInterpreterPath": "/opt/rt5w/.pixi/envs/default/bin/python"
+      },
+      "extensions": ["ms-python.python", "mshr-h.veriloghdl"]
+    }
+  },
+  // HIL from inside the container: serve the board on the host with  python3 hil/tools/rfc2217_bridge.py /dev/ttyACM0
+  // then use  --port rfc2217://host.docker.internal:4000  (Linux: add "--add-host=host.docker.internal:host-gateway" to runArgs)
+  "forwardPorts": []
+}

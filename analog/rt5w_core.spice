@@ -1,0 +1,137 @@
+* RT5W analog core, gf180mcuD (nmos_3p3 / pmos_3p3), VDPWR = 3.3 V. Design of record for this rebuild.
+* Simulation-only elements (to be replaced by drawn circuits before layout) are marked IDEAL.
+* Devices with floating sources sit in DNWELL pockets (p-well tied to source); in SPICE that is bulk = source.
+* Units: um. All biased devices sized for gm/ID >= ~23 S/A (weak-inversion rule of record), audited in sim/.
+
+*------------------------------------------------------------------------------------------------------------
+* Bias reference: cascoded weak-inversion beta multiplier, K = 8, R = 170k -> I_ref = 0.5 uA PTAT, with start-up.
+* iout: cascoded PMOS copy (sources current).  vcp/vcn cascode biases are IDEAL 0.1 uA stacks (Ib5, Ib6).
+.subckt rt5w_bmult vdd vss iout
+M1 n1 n1 vss vss nmos_3p3 w=40u l=2u
+M2 n2c n1 s2 s2 nmos_3p3 w=40u l=2u m=8
+R1 s2 vss 170k
+M1c p1 vcn n1 vss nmos_3p3 w=20u l=4u
+M2c p2 vcn n2c vss nmos_3p3 w=20u l=4u m=8
+M3 a3 p2 vdd vdd pmos_3p3 w=40u l=4u
+M4 a4 p2 vdd vdd pmos_3p3 w=40u l=4u
+M3c p1 vcp a3 vdd pmos_3p3 w=40u l=4u
+M4c p2 vcp a4 vdd pmos_3p3 w=40u l=4u
+M5 x5 x5 vdd vdd pmos_3p3 w=4u l=16u
+M5b vcp vcp x5 vdd pmos_3p3 w=4u l=16u
+Ib5 vcp vss 0.1u
+M6 vcn vcn x6 vss nmos_3p3 w=4u l=16u
+M6b x6 x6 vss vss nmos_3p3 w=4u l=16u
+Ib6 vdd vcn 0.1u
+M7 a7 p2 vdd vdd pmos_3p3 w=40u l=4u
+M7c iout vcp a7 vdd pmos_3p3 w=40u l=4u
+* start-up (releases once the core runs)
+M8 a p2 vdd vdd pmos_3p3 w=40u l=4u
+Mld a x6 vss vss nmos_3p3 w=4u l=16u
+Mi1 b a vss vss nmos_3p3 w=1u l=4u
+Mi2 b vss vdd vdd pmos_3p3 w=0.5u l=50u
+Ms3 p2 b vss vss nmos_3p3 w=1u l=2u
+.ends
+
+*------------------------------------------------------------------------------------------------------------
+* 4-bit thermometer column IDAC (sink), 15 units of I_LSB mirrored from nd (fed I_LSB = 8.25 nA x PTAT).
+.subckt rt5w_idac4 col nd vss t0 t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14
+Md nd nd vss vss nmos_3p3 w=2u l=16u
+Mu0 s0 nd vss vss nmos_3p3 w=2u l=16u
+Ms0 col t0 s0 vss nmos_3p3 w=1u l=0.5u
+Mu1 s1 nd vss vss nmos_3p3 w=2u l=16u
+Ms1 col t1 s1 vss nmos_3p3 w=1u l=0.5u
+Mu2 s2 nd vss vss nmos_3p3 w=2u l=16u
+Ms2 col t2 s2 vss nmos_3p3 w=1u l=0.5u
+Mu3 s3 nd vss vss nmos_3p3 w=2u l=16u
+Ms3 col t3 s3 vss nmos_3p3 w=1u l=0.5u
+Mu4 s4 nd vss vss nmos_3p3 w=2u l=16u
+Ms4 col t4 s4 vss nmos_3p3 w=1u l=0.5u
+Mu5 s5 nd vss vss nmos_3p3 w=2u l=16u
+Ms5 col t5 s5 vss nmos_3p3 w=1u l=0.5u
+Mu6 s6 nd vss vss nmos_3p3 w=2u l=16u
+Ms6 col t6 s6 vss nmos_3p3 w=1u l=0.5u
+Mu7 s7 nd vss vss nmos_3p3 w=2u l=16u
+Ms7 col t7 s7 vss nmos_3p3 w=1u l=0.5u
+Mu8 s8 nd vss vss nmos_3p3 w=2u l=16u
+Ms8 col t8 s8 vss nmos_3p3 w=1u l=0.5u
+Mu9 s9 nd vss vss nmos_3p3 w=2u l=16u
+Ms9 col t9 s9 vss nmos_3p3 w=1u l=0.5u
+Mu10 s10 nd vss vss nmos_3p3 w=2u l=16u
+Ms10 col t10 s10 vss nmos_3p3 w=1u l=0.5u
+Mu11 s11 nd vss vss nmos_3p3 w=2u l=16u
+Ms11 col t11 s11 vss nmos_3p3 w=1u l=0.5u
+Mu12 s12 nd vss vss nmos_3p3 w=2u l=16u
+Ms12 col t12 s12 vss nmos_3p3 w=1u l=0.5u
+Mu13 s13 nd vss vss nmos_3p3 w=2u l=16u
+Ms13 col t13 s13 vss nmos_3p3 w=1u l=0.5u
+Mu14 s14 nd vss vss nmos_3p3 w=2u l=16u
+Ms14 col t14 s14 vss nmos_3p3 w=1u l=0.5u
+.ends
+
+*------------------------------------------------------------------------------------------------------------
+* Array column: PMOS diode (source = bulk = VDD) carrying I_Q,c; drives the column gate line dcol.
+.subckt rt5w_coldiode vdd dcol
+Md dcol dcol vdd vdd pmos_3p3 w=20u l=4u m=8
+.ends
+
+* Array cell: PMOS with floating gate fg = dcol - V_w (C_W between dcol and fg). I = I_Q * exp(-V_w / nU_T,p).
+* Write: transmission gate fg <-> vw (ua[2]) while wsel is high (and dcol held at its write reference).
+.subckt rt5w_cell vdd vss dcol row vw wsel wselb
+Mc row fg vdd vdd pmos_3p3 w=20u l=4u m=8
+Cw dcol fg 1p
+Mwn fg wsel vw vss nmos_3p3 w=0.5u l=0.5u
+Mwp fg wselb vw vdd pmos_3p3 w=0.5u l=0.5u
+.ends
+
+* Row trim cell (rev 3, steered pump, 20 MHz): one 50 ns clock of I_P = 3.7 nA -> ~0.14 mV on C_W = 1 pF.
+* up_b/dn active pulses; up/dn_b are their complements (steering); vmid = cell-voltage replica (IDEAL here).
+.subckt rt5w_trim vdd vss w up_b up dn dn_b pg ng vmid
+Mpu pu pg vdd vdd pmos_3p3 w=1u l=4u
+Msu w up_b pu vdd pmos_3p3 w=0.5u l=0.5u
+Msub vmid up pu vdd pmos_3p3 w=0.5u l=0.5u
+Mnd nd ng vss vss nmos_3p3 w=1u l=4u
+Msd w dn nd vss nmos_3p3 w=0.5u l=0.5u
+Msdb vmid dn_b nd vss nmos_3p3 w=0.5u l=0.5u
+Cw w vss 1p
+.ends
+
+*------------------------------------------------------------------------------------------------------------
+* Softmax core (rev 2b): scores enter as currents into g0..g3 (row lines), R_c = 1.376 Meg to vr.
+* Exponentiators in one DNWELL pocket, p-well tied to V_B. Tail: wide-swing cascode mirror, I_sum = 4 x ibias_in.
+* Keep-alive I_K (kbias_in) on each PMOS diode, removed again by replica sinks at the outputs out0..out3.
+* vr (1.65 V) and vcas (1.05 V) are IDEAL references in this netlist.
+.subckt rt5w_softmax vdd vss g0 g1 g2 g3 vb out0 out1 out2 out3 nbias kbias vr vcas
+Rc0 vr g0 1.376Meg
+Rc1 vr g1 1.376Meg
+Rc2 vr g2 1.376Meg
+Rc3 vr g3 1.376Meg
+Me0 dp0 g0 vb vb nmos_3p3 w=50u l=1u m=4
+Me1 dp1 g1 vb vb nmos_3p3 w=50u l=1u m=4
+Me2 dp2 g2 vb vb nmos_3p3 w=50u l=1u m=4
+Me3 dp3 g3 vb vb nmos_3p3 w=50u l=1u m=4
+Mbc nbias vcas nbm vss nmos_3p3 w=48u l=1u
+Mbias nbm nbias vss vss nmos_3p3 w=48u l=1u
+Mtail tc nbias vss vss nmos_3p3 w=48u l=1u m=4
+Mcas vb vcas tc vss nmos_3p3 w=48u l=1u m=4
+Cb vb vss 1p
+Mkb kbias kbias vss vss nmos_3p3 w=4u l=2u
+Mp0 dp0 dp0 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mo0 out0 dp0 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mk0 dp0 kbias vss vss nmos_3p3 w=4u l=2u
+Mr0 out0 kbias vss vss nmos_3p3 w=4u l=2u
+Mp1 dp1 dp1 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mo1 out1 dp1 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mk1 dp1 kbias vss vss nmos_3p3 w=4u l=2u
+Mr1 out1 kbias vss vss nmos_3p3 w=4u l=2u
+Mp2 dp2 dp2 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mo2 out2 dp2 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mk2 dp2 kbias vss vss nmos_3p3 w=4u l=2u
+Mr2 out2 kbias vss vss nmos_3p3 w=4u l=2u
+Mp3 dp3 dp3 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mo3 out3 dp3 vdd vdd pmos_3p3 w=60u l=1u m=4
+Mk3 dp3 kbias vss vss nmos_3p3 w=4u l=2u
+Mr3 out3 kbias vss vss nmos_3p3 w=4u l=2u
+.ends
+
+* NOT YET DRAWN (behavioural in test/rt5w_analog_beh.v): 8-bit SAR current DAC + current comparator,
+* V_B probe buffer (ua[1]), write-reference switch for dcol during weight writes, pump bias / vmid replica.

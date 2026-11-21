@@ -1,0 +1,75 @@
+** sch_path: /home/claude/rt5w_sky/tt/xschem/rt5w_softmax.sch
+.subckt rt5w_softmax g0 g1 g2 g3 nbias kbias vr vcas vb out0 out1 out2 out3 vdd vss
+*.ipin g0
+*.opin out0
+*.ipin g1
+*.opin out1
+*.ipin g2
+*.opin out2
+*.ipin g3
+*.opin out3
+*.ipin nbias
+*.ipin vcas
+*.ipin kbias
+*.ipin vr
+*.opin vb
+XMp0 dp0 dp0 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=4 m=4
+XMo0 out0 dp0 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=16 m=16
+XMk0 dp0 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMr0 out0 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218
++ sa=0 sb=0 sd=0 mult=4 m=4
+XMe0 dp0 g0 vb vss sky130_fd_pr__nfet_g5v0d10v5 L=2 W=7.15 nf=1 ad=2.074 as=2.074 pd=14.88 ps=14.88 nrd=0.04056 nrs=0.04056 sa=0
++ sb=0 sd=0 mult=4 m=4
+XRc0 g0 vr vss sky130_fd_pr__res_xhigh_po_0p35 L=244 mult=1 m=1
+XMp1 dp1 dp1 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=4 m=4
+XMo1 out1 dp1 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=16 m=16
+XMk1 dp1 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMr1 out1 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218
++ sa=0 sb=0 sd=0 mult=4 m=4
+XMe1 dp1 g1 vb vss sky130_fd_pr__nfet_g5v0d10v5 L=2 W=7.15 nf=1 ad=2.074 as=2.074 pd=14.88 ps=14.88 nrd=0.04056 nrs=0.04056 sa=0
++ sb=0 sd=0 mult=4 m=4
+XRc1 g1 vr vss sky130_fd_pr__res_xhigh_po_0p35 L=244 mult=1 m=1
+XMp2 dp2 dp2 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=4 m=4
+XMo2 out2 dp2 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=16 m=16
+XMk2 dp2 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMr2 out2 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218
++ sa=0 sb=0 sd=0 mult=4 m=4
+XMe2 dp2 g2 vb vss sky130_fd_pr__nfet_g5v0d10v5 L=2 W=7.15 nf=1 ad=2.074 as=2.074 pd=14.88 ps=14.88 nrd=0.04056 nrs=0.04056 sa=0
++ sb=0 sd=0 mult=4 m=4
+XRc2 g2 vr vss sky130_fd_pr__res_xhigh_po_0p35 L=244 mult=1 m=1
+XMp3 dp3 dp3 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=4 m=4
+XMo3 out3 dp3 vdd vdd sky130_fd_pr__pfet_g5v0d10v5 L=4 W=15.11 nf=1 ad=4.382 as=4.382 pd=30.8 ps=30.8 nrd=0.01919 nrs=0.01919 sa=0
++ sb=0 sd=0 mult=16 m=16
+XMk3 dp3 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMr3 out3 kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218
++ sa=0 sb=0 sd=0 mult=4 m=4
+XMe3 dp3 g3 vb vss sky130_fd_pr__nfet_g5v0d10v5 L=2 W=7.15 nf=1 ad=2.074 as=2.074 pd=14.88 ps=14.88 nrd=0.04056 nrs=0.04056 sa=0
++ sb=0 sd=0 mult=4 m=4
+XRc3 g3 vr vss sky130_fd_pr__res_xhigh_po_0p35 L=244 mult=1 m=1
+XMcas vb vcas tc vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=0.62 nf=1 ad=0.1798 as=0.1798 pd=1.82 ps=1.82 nrd=0.4677 nrs=0.4677 sa=0
++ sb=0 sd=0 mult=1 m=1
+XMtail tc nbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=4 W=2.24 nf=1 ad=0.6496 as=0.6496 pd=5.06 ps=5.06 nrd=0.1295 nrs=0.1295
++ sa=0 sb=0 sd=0 mult=16 m=16
+XMbc nbias vcas nbm vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=0.62 nf=1 ad=0.1798 as=0.1798 pd=1.82 ps=1.82 nrd=0.4677 nrs=0.4677
++ sa=0 sb=0 sd=0 mult=1 m=1
+XMbias nbm nbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=4 W=2.24 nf=1 ad=0.6496 as=0.6496 pd=5.06 ps=5.06 nrd=0.1295 nrs=0.1295
++ sa=0 sb=0 sd=0 mult=4 m=4
+XMkb kbias kbias vss vss sky130_fd_pr__nfet_g5v0d10v5 L=1 W=2.38 nf=1 ad=0.6902 as=0.6902 pd=5.34 ps=5.34 nrd=0.1218 nrs=0.1218
++ sa=0 sb=0 sd=0 mult=1 m=1
+XCb vss vb vss vss sky130_fd_pr__nfet_g5v0d10v5 L=15 W=15 nf=1 ad=4.35 as=4.35 pd=30.58 ps=30.58 nrd=0.01933 nrs=0.01933 sa=0 sb=0
++ sd=0 mult=1 m=1
+.ends
+.GLOBAL vdd
+.GLOBAL vss
+.end

@@ -1,0 +1,325 @@
+{
+ "backend": "ngspice",
+ "corner": "ff",
+ "temp": 125.0,
+ "seed": null,
+ "calibration": null,
+ "results": [
+  {
+   "example": "E1 thinking_machines",
+   "labels": [
+    "Thinking",
+    "Machines"
+   ],
+   "chip": [
+    0.8819,
+    0.1181
+   ],
+   "reference": [
+    0.8808,
+    0.1192
+   ],
+   "max_abs_err": 0.0011,
+   "argmax_ok": true,
+   "scores": [
+    112.0,
+    96.0
+   ],
+   "scaled": [
+    14.0,
+    12.0
+   ],
+   "codes": [
+    224,
+    30,
+    0,
+    0
+   ],
+   "golden_codes": [
+    225,
+    30,
+    0,
+    0
+   ],
+   "masked_slots_zero": true,
+   "mask_bound_ok": true
+  },
+  {
+   "example": "E2 matrix_form",
+   "labels": [
+    "T.T",
+    "T.M",
+    "M.T",
+    "M.M"
+   ],
+   "chip": [
+    0.8819,
+    0.1181,
+    0.8667,
+    0.1333
+   ],
+   "reference": [
+    0.8808,
+    0.1192,
+    0.8641,
+    0.1359
+   ],
+   "max_abs_err": 0.0025,
+   "argmax_ok": true,
+   "passes": 2
+  },
+  {
+   "example": "E3 it_animal (pivot merge)",
+   "labels": [
+    "The",
+    "animal",
+    "didn't",
+    "cross",
+    "the",
+    "street",
+    "because",
+    "it",
+    "was",
+    "too",
+    "tired"
+   ],
+   "chip": [
+    0.0261,
+    0.6101,
+    0.013,
+    0.0183,
+    0.0217,
+    0.1456,
+    0.0124,
+    0.07,
+    0.014,
+    0.0196,
+    0.0493
+   ],
+   "reference": [
+    0.0292,
+    0.5873,
+    0.0145,
+    0.0196,
+    0.0239,
+    0.1448,
+    0.016,
+    0.0719,
+    0.0177,
+    0.0217,
+    0.0533
+   ],
+   "max_abs_err": 0.0229,
+   "argmax_ok": true,
+   "pivot": "animal",
+   "passes_pivot": 4,
+   "top_word": "animal",
+   "lse_merge": {
+    "chip": [
+     0.0252,
+     0.5905,
+     0.0126,
+     0.0177,
+     0.0223,
+     0.1503,
+     0.0142,
+     0.0721,
+     0.0172,
+     0.0217,
+     0.0561
+    ],
+    "max_abs_err": 0.0055,
+    "argmax_ok": true,
+    "passes": 3
+   }
+  },
+  {
+   "example": "E4 multi_head (2 heads, time-shared)",
+   "heads": {
+    "head0": {
+     "top": "animal",
+     "ref_top": "animal",
+     "max_abs_err": 0.0227
+    },
+    "head1": {
+     "top": "tired",
+     "ref_top": "tired",
+     "max_abs_err": 0.0084
+    }
+   },
+   "argmax_ok": true,
+   "max_abs_err": 0.0227,
+   "passes": 8
+  },
+  {
+   "example": "E5 decoder_masked",
+   "steps": [
+    {
+     "step": 0,
+     "query": "<s>",
+     "chip": [
+      1.0
+     ],
+     "reference": [
+      1.0
+     ],
+     "masked_codes": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "step": 1,
+     "query": "I",
+     "chip": [
+      0.114,
+      0.886
+     ],
+     "reference": [
+      0.119,
+      0.881
+     ],
+     "masked_codes": [
+      0,
+      0
+     ]
+    },
+    {
+     "step": 2,
+     "query": "am",
+     "chip": [
+      0.091,
+      0.24,
+      0.669
+     ],
+     "reference": [
+      0.099,
+      0.242,
+      0.659
+     ],
+     "masked_codes": [
+      0
+     ]
+    },
+    {
+     "step": 3,
+     "query": "a",
+     "chip": [
+      0.059,
+      0.094,
+      0.24,
+      0.606
+     ],
+     "reference": [
+      0.066,
+      0.098,
+      0.242,
+      0.594
+     ],
+     "masked_codes": []
+    }
+   ],
+   "max_abs_err": 0.012,
+   "masked_zero_when_bound_holds": true,
+   "argmax_ok": true
+  },
+  {
+   "example": "E6 enc_dec_attention",
+   "rows": [
+    {
+     "query": "I",
+     "attends": "je",
+     "ref_attends": "je",
+     "chip": [
+      0.882,
+      0.067,
+      0.051
+     ]
+    },
+    {
+     "query": "am",
+     "attends": "suis",
+     "ref_attends": "suis",
+     "chip": [
+      0.051,
+      0.886,
+      0.063
+     ]
+    },
+    {
+     "query": "a",
+     "attends": "etudiant",
+     "ref_attends": "etudiant",
+     "chip": [
+      0.067,
+      0.142,
+      0.791
+     ]
+    },
+    {
+     "query": "student",
+     "attends": "etudiant",
+     "ref_attends": "etudiant",
+     "chip": [
+      0.031,
+      0.043,
+      0.925
+     ]
+    }
+   ],
+   "max_abs_err": 0.0074,
+   "argmax_ok": true
+  },
+  {
+   "example": "E7 vocab_softmax (12 words, pivot tiles)",
+   "labels": [
+    "a",
+    "am",
+    "I",
+    "thanks",
+    "student",
+    "<eos>",
+    "je",
+    "suis",
+    "the",
+    "it",
+    "was",
+    "cross"
+   ],
+   "chip": [
+    0.0137,
+    0.0189,
+    0.0233,
+    0.0101,
+    0.8126,
+    0.0411,
+    0.0103,
+    0.0112,
+    0.021,
+    0.0123,
+    0.0153,
+    0.0102
+   ],
+   "reference": [
+    0.0147,
+    0.0198,
+    0.0242,
+    0.0109,
+    0.802,
+    0.0441,
+    0.0098,
+    0.012,
+    0.0219,
+    0.0133,
+    0.0162,
+    0.0109
+   ],
+   "max_abs_err": 0.0105,
+   "argmax_ok": true,
+   "passes": 4,
+   "word": "student",
+   "passes_for_10000_words": 3333
+  }
+ ]
+}

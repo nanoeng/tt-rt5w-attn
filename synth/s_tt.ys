@@ -1,0 +1,9 @@
+read_verilog ../src/rt5w_ctrl.v
+synth -top rt5w_ctrl -flatten
+dfflegalize -cell $_DFF_PN0_ 01 -cell $_DFF_PN1_ 01
+dfflibmap -liberty /home/claude/ext/gf180_sc7_tt_025C_3v30.lib
+abc -liberty /home/claude/ext/gf180_sc7_tt_025C_3v30.lib -D 20000
+opt_clean
+hilomap -hicell gf180mcu_fd_sc_mcu7t5v0__tieh Z -locell gf180mcu_fd_sc_mcu7t5v0__tiel ZN
+stat -liberty /home/claude/ext/gf180_sc7_tt_025C_3v30.lib
+write_verilog -noattr gate_level_ctrl_tt.v

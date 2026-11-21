@@ -1,0 +1,4 @@
+slack at 50.0 ns: 29.35 ns   (estimate: no wire RC, ideal clock, 5 fF/sink)
+  next: 20.14 ns _1797_.D
+  next: 19.92 ns _1785_.D
+  next: 19.90 ns _1743_.D
